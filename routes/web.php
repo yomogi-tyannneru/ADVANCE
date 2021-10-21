@@ -1,18 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdvanceController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+//打刻ページ
+Route::get('/', [AdvanceController::class, 'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//会員登録ページ
+Route::get('/register', [AdvanceController::class, 'register']);
+
+//ログインページ
+Route::get('/login', [AdvanceController::class, 'login']);
+
+//日付別勤怠ページ
+Route::get('/attendance', [AdvanceController::class, 'attendance']);
