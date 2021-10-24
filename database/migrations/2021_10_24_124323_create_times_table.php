@@ -14,13 +14,9 @@ class CreateTimesTable extends Migration
     public function up()
     {
         Schema::create('times', function (Blueprint $table) {
-            $table->integer('worker_id')->unsigned();
+            $table->foreignId('worker_id')->constrained('workers')->onDelete('cascade');
             $table->time('break_start')->nullable();
             $table->time('break_end')->nullable();
-            $table->foreign('worker_id')
-                    ->references('id')
-                    ->on('workers')
-                    ->onDelete('cascade');
         });
     }
 
