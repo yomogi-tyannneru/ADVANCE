@@ -131,6 +131,12 @@ body {
 }
 </style>
 <body>
+  @if (Auth::check())
+<p>ログイン中ユーザー: {{$user->name . ' メール' . $user->email . ''}}</p>
+@else
+<p>ログインしていません。（<a href="/login">ログイン</a>｜
+  <a href="/register">登録</a>）</p>
+@endif
   <header class="header flex__item">
     <a class="header__nav-list-link header-title">Atte</a>
     <nav class="header__nav">

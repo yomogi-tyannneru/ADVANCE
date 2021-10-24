@@ -8,9 +8,14 @@ use App\Models\Advance;
 
 class AdvanceController extends Controller
 {
-    //お問い合わせ
+    //打刻ページ
     public function index(Request $request)
     {
+        $user = Auth::user();
+        $items = Author::paginate(5);
+        $param = ['items' => $items, 'user' =>$user];
+        return view('index', $param);
+
         $this->validate($request, Advance::$rules);
         $param = [
             'name' => $request->name,
@@ -26,7 +31,7 @@ class AdvanceController extends Controller
         DB::insert('insert into times ( break_start, break_end) values (:break_start, :break_end)', $param);
         return redirect('/');
     }
-    //内容確認
+    //会員登録ページ
     public function confirmation(Request $request)
     {
         $this->validate($request, Advance::$rules);
@@ -44,7 +49,7 @@ class AdvanceController extends Controller
         DB::insert('insert into times (name, mail, password, punch_in, punch_out, break_start, break_end) values (:name, :mail, :password, :punch_in, :punch_out, :break_start, :break_end)', $param);
         return redirect('/');
     }
-    //送信後
+    //ログインページ
     public function sending(Request $request)
     {
         $this->validate($request, Standardlasttest::$rules);
@@ -61,7 +66,7 @@ class AdvanceController extends Controller
         DB::insert('insert into contacts (fullname, gender, email, postcode, address, building_name, created_at, updated_at) values (:fullname, :gender, :email, :postcode, :address, :building_name, :created_at, :updated_at)', $param);
         return redirect('/');
     }
-    //管理システム
+    //日付別勤怠ページ
     public function management(Request $request)
     {
         $this->validate($request, Standardlasttest::$rules);
@@ -78,4 +83,23 @@ class AdvanceController extends Controller
         DB::insert('insert into contacts (fullname, gender, email, postcode, address, building_name, created_at, updated_at) values (:fullname, :gender, :email, :postcode, :address, :building_name, :created_at, :updated_at)', $param);
         return redirect('/');
     }
+    public function check(Request $request)
+    {
+    $text = ['text' => 'ログインして下さい。'];
+    return view('auth', $text);
+    }
+
+    public function checkUser(Request $request)
+    {
+    $email = $request->email;
+    $password = $request->password;
+    if (Auth::attempt(['email' => $email,
+            'password' => $password])) {
+        $text =   Auth::user()->name . 'さんがログインしました';
+    } else {
+        $text = 'ログインに失敗しました';
+    }
+    return view('auth', ['text' => $text]);
+    }
+
 }
