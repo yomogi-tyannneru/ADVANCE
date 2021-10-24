@@ -14,13 +14,13 @@ class CreateTimesTable extends Migration
     public function up()
     {
         Schema::create('times', function (Blueprint $table) {
-            $table->id()->unsigned();
-            $table->string('name');
-            $table->string('mail');
-            $table->string('password');
-            $table->time('punch_in')->nullable();
-            $table->time('punch_out')->nullable();
-            
+            $table->integer('worker_id')->unsigned();
+            $table->time('break_start')->nullable();
+            $table->time('break_end')->nullable();
+            $table->foreign('worker_id')
+                    ->references('id')
+                    ->on('workers')
+                    ->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,8 @@ class CreateTimesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('times');
+        Schema::dropIfExists('times', function (Blueprint $table) {
+            $table->dropForeign('times_worker_id_foreign');
+        });
     }
 }

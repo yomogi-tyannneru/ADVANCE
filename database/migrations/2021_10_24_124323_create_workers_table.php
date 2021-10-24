@@ -14,10 +14,12 @@ class CreateWorkersTable extends Migration
     public function up()
     {
         Schema::create('workers', function (Blueprint $table) {
-            $table->worker_id();
-            $table->time('break_start')->nullable();
-            $table->time('break_end')->nullable();
-            $table->foreign('worker_id');
+            $table->id()->unsigned();
+            $table->string('name');
+            $table->string('mail');
+            $table->string('password');
+            $table->time('punch_in')->nullable();
+            $table->time('punch_out')->nullable();
         });
     }
 
