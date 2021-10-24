@@ -20,8 +20,7 @@ class CreateTimesTable extends Migration
             $table->string('password');
             $table->time('punch_in')->nullable();
             $table->time('punch_out')->nullable();
-            $table->time('break_start')->nullable();
-            $table->time('break_end')->nullable();
+            
         });
     }
 

@@ -11,7 +11,7 @@ class AdvanceController extends Controller
     //お問い合わせ
     public function index()
     {
-        $items = DB::select('select * from times');
+        $items = DB::select('select * from workers');
         return view('index');
     }
     //内容確認

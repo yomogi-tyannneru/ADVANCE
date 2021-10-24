@@ -219,21 +219,19 @@ input:checked + label::after {
 
 <body>
   <header class="header flex__item">
-    <a>Atte</a>
+    <a class="header__nav-list-link header-title">Atte</a>
     <nav class="header__nav">
-      <div class="header__nav-list flex__item">
-        <form action="/confirmation" class="form" name="contact" method="POST">
-          @csrf
+      <ul class="header__nav-list flex__item">
           <li>
-            <a href="index.html" class="header__nav-list-link" style="color:black;">ホーム</a>
+            <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
           </li>
           <li>
-            <a href="service.html" class="header__nav-list-link" style="color:black;">日付一覧</a>
+            <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
           </li>
           <li>
             <a href="news.html" class="header__nav-list-link" style="color:black;">ログアウト</a>
           </li>
-        </div>
+        </ul>
       </nav>
     </header>
   <h1>お問い合わせ</h1>
@@ -293,4 +291,7 @@ input:checked + label::after {
   </div>
   <input type="submit" class="form-btn" value="確認" name="opinion1" >
 </form>
+</body>
+
+
 </body>
