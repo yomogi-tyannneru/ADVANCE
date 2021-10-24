@@ -42,22 +42,22 @@ body {
   top: 0px;
   z-index: 1;
   height: 70px;
-  line-height: 70px;
   background-color: #fff;
+  padding: 20px 0;
 }
 
 .header-title {
-  font-size: 180%;
-  padding: 0px 40px;
+  font-size: 200%;
+  padding: 0px 35px;
 }
 
 .header__nav {
-  margin-right: 40px;
+  margin-right: 60px;
 }
 
 .header__nav-list li {
-  margin-right: 25px;
-  font-size: 100%;
+  margin-right: 50px;
+  font-size: 120%;
 }
 
 .header__nav-list li:last-child {
@@ -75,15 +75,31 @@ body {
 }
 
 
-
-
-
-
-h1 {
-  text-align: center;
+/*--------------------- stamp--------------------- */
+.service {
+  padding: 20px 160px 100px;
+  background-color: #DCDCDC;
 }
+
+.service-title {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-weight: bolder;
+}
+
+.service_png-position {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.service_png-positiondiv {
+  width: 48%;
+}
+
 .form{
-  width: 60%;
   margin: 20px auto;
 }
 .form-item {
@@ -92,131 +108,28 @@ h1 {
   display: flex;
   align-items: center;
 }
-.form-item-label {
-  width: 20%;
-  font-weight: bold;
-  font-size: 16px;
-}
-.form-item-label1 {
-  padding-left: 40px;
-}
-.form-item-label-required {
-  color: red;
-}
-.form-item-input {
-  border: 1px solid #C0C0C0;
-  border-radius: 6px;
-  margin-left: 40px;
-  padding: 0 10px;
-  height: 48px;
-  width: 100%;
-  font-size: 18px;
-}
-.form-item-input1 {
-  border: 1px solid #C0C0C0;
-  border-radius: 6px;
-  margin-left: 40px;
-  padding: 0 10px;
-  height: 48px;
-  width: 45%;
-  font-size: 18px;
-}
-.form-item-label-example {
-  padding-left: 200px;
-  color: #C0C0C0;
-}
-.form-item-label-example1 {
-  padding-left: 280px;
-  color: #C0C0C0;
-}
-label {
-  position: relative;
-  cursor: pointer;
-  padding-left: 50px;
-}
 
-label::before,
-label::after {
-  content: "";
-  display: block; 
-  border-radius: 50%;
-  position: absolute;
-  transform: translateY(-50%);
-  top: 50%;
-}
-
-label::before {
-  background-color: #fff;
-  border: 1px solid #C0C0C0;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  left: 5px;
-}
-
-label::after {
-  background-color: #C0C0C0;
-  border-radius: 50%;
-  opacity: 0;
-  width: 16px;
-  height: 16px;
-  left: 13px
-}
-
-input:checked + label::after {
-  opacity: 1;
-}
-
-.visually-hidden {
- position: absolute;
- white-space: nowrap;
- border: 0;
- clip: rect(0 0 0 0);
- clip-path: inset(50%);
- overflow: hidden;
- height: 1px;
- width: 1px;
- margin: -1px;
- padding: 0;
-}
-.male {
-  padding-right: 30px;
-}
-.form-item-input2 {
-  border: 1px solid #C0C0C0;
-  border-radius: 6px;
-  margin-left: 40px;
-  padding: 0 10px;
-  height: 48px;
-  width: 80%;
-  font-size: 18px;
-}
-.form-item-textarea {
-  border: 1px solid #C0C0C0;
-  border-radius: 6px;
-  margin-left: 40px;
-  padding: 0 10px;
-  height: 200px;
-  width: 100%;
-  font-size: 18px;
-}
 .form-btn {
   border-radius: 6px;
-  margin: 32px auto 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 280px;
+  border: 0px solid #fff;
+  background-color: #fff;
+  height: 200px;
+  width: 100%;
   display: block;
-  background: black;
-  color: #fff;
-  font-weight: bold;
-  font-size: 20px;
-  border: none;
+  font-size: 22px;
+  margin: 0px 10px;
+  font-weight: bolder;
+}
+.form-btn:hover {
+  filter: opacity(70%);
   cursor: pointer;
 }
+.service-title2 {
+  font-size: 16px;
+  text-align: center;
+  font-weight: bolder;
+}
 </style>
-
-
 <body>
   <header class="header flex__item">
     <a class="header__nav-list-link header-title">Atte</a>
@@ -234,64 +147,44 @@ input:checked + label::after {
         </ul>
       </nav>
     </header>
-  <h1>お問い合わせ</h1>
-<form action="/confirmation" class="form" name="contact" method="POST">
-@csrf
-  <div class="form-item">
-    <p class="form-item-label">
-      お名前<span class="form-item-label-required">※</span>
-    </p>
-    <input type="text" name="fullname" class="form-item-input1">
-    <input type="text" name="fullname" class="form-item-input1">
+  <div class="service">
+    <p class="service-title">福場凛太郎（nameがくる）さんお疲れさまです！</p>
+    <div class="service_png-position">
+      <div class="service_png-positiondiv">
+        <form action="/" class="form" name="punch_in" method="POST">
+          @csrf
+          <div class="form-item">
+          <input type="submit" name="punch_in" value="勤務開始" class="form-btn">
+          </div>
+        </form>
+      </div>
+      <div class="service_png-positiondiv">
+        <form action="/" class="form" name="punch_out" method="POST">
+          @csrf
+          <div class="form-item">
+          <input type="submit" name="punch_out" value="勤務終了" class="form-btn">
+          </div>
+        </form>
+      </div>
+      <div class="service_png-positiondiv">
+        <form action="/" class="form" name="break_start" method="POST">
+          @csrf
+          <div class="form-item">
+          <input type="submit" name="break_start" value="休憩開始" class="form-btn">
+          </div>
+        </form>
+      </div>
+      <div class="service_png-positiondiv">
+        <form action="/" class="form" name="break_end" method="POST">
+          @csrf
+          <div class="form-item">
+          <input type="submit" name="break_end" value="休憩終了" class="form-btn">
+          </div>
+        </form>
+      </div>
+    </div>
   </div>
-  <p class="form-item-label-example">例）山田　　　　　　　　　　　　　　　　　　　例）太郎</p>
-  <div class="form-item">
-    <p class="form-item-label">
-      性別<span class="form-item-label-required">※</span>
-    </p>
-    <input  class="visually-hidden" type="radio" name="gender" id="male" checked="checked" />
-    <label for="male" class="male">男性</label>
-    <input class="visually-hidden" type="radio" name="gender" id="female"/>
-    <label for="female">女性</label>
-  </div>
-  <div class="form-item">
-    <p class="form-item-label">
-      メールアドレス<span class="form-item-label-required">※</span>
-    </p>
-    
-    <input type="text" name="email" class="form-item-input">
-    
-  </div>
-  <p class="form-item-label-example">例）test@example.com</p>
-  <div class="form-item">
-    <p class="form-item-label">
-      郵便番号<span class="form-item-label-required">※</span>
-    </p>
-    <p class="form-item-label1">〒</p>
-    <input type="text" name="postcode" class="form-item-input2">
-  </div>
-  <p class="form-item-label-example1">例）123-4567</p>
-  <div class="form-item">
-    <p class="form-item-label">
-      住所<span class="form-item-label-required">※</span>
-    </p>
-    <input type="text" name="address" class="form-item-input">
-  </div>
-  <p class="form-item-label-example">例）東京都渋谷区千駄ヶ谷1-2-3</p>
-  <div class="form-item">
-    <p class="form-item-label">建物名</p>
-    <input type="text" name="building_name" class="form-item-input">
-  </div>
-  <p class="form-item-label-example">例）千駄ヶ谷マンション101</p>
-  <div class="form-item">
-    <p class="form-item-label">
-      ご意見<span class="form-item-label-required">※</span>
-    </p>
-    <textarea name="opinion" maxlength="120" class="form-item-textarea"></textarea>
-  </div>
-  <input type="submit" class="form-btn" value="確認" name="opinion1" >
-</form>
+  <p class="service-title2">Atte,inc.</p>
 </body>
 
 
-</body>

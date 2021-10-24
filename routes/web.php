@@ -5,6 +5,7 @@ use App\Http\Controllers\AdvanceController;
 
 //打刻ページ
 Route::get('/', [AdvanceController::class, 'index']);
+Route::post('/', [AdvanceController::class, 'index']);
 
 //会員登録ページ
 Route::get('/register', [AdvanceController::class, 'register']);
