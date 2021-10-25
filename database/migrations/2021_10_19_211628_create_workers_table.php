@@ -15,7 +15,7 @@ class CreateWorkersTable extends Migration
     {
         Schema::create('workers', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->integer('worker_id')->unsigned();
+            $table->biginteger('worker_id')->unsigned();
             $table->string('name');
             $table->string('mail');
             $table->string('password');

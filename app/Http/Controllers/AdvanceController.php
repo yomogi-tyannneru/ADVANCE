@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Advance;
 
 class AdvanceController extends Controller
@@ -12,9 +13,9 @@ class AdvanceController extends Controller
     public function index(Request $request)
     {
         $user = Auth::user();
-        $items = Author::paginate(5);
-        $param = ['items' => $items, 'user' =>$user];
-        return view('index', $param);
+        // $items = Author::paginate(5);
+        // $param = ['items' => $items, 'user' =>$user];
+        $param = ['user' => $user];
 
         $this->validate($request, Advance::$rules);
         $param = [
