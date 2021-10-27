@@ -17,7 +17,7 @@ class CreateWorkersTable extends Migration
             $table->id()->unsigned();
             $table->biginteger('worker_id')->unsigned();
             $table->string('name');
-            $table->string('mail');
+            $table->string('email');
             $table->string('password');
             $table->time('punch_in')->nullable();
             $table->time('punch_out')->nullable();

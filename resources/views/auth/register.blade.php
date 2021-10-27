@@ -9,7 +9,8 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('register') }}" >
+        <form method="POST" action="/" >
             @csrf
 
             <!-- Name -->
@@ -18,6 +19,7 @@
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
+            
 
             <!-- Email Address -->
             <div class="mt-4">
@@ -46,14 +48,17 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
+                <p>アカウントをお持ちの方はこちら</p>
+
                 <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                    {{ __('Already registered?') }}
+                    {{ __('ログイン') }}
                 </a>
 
                 <x-button class="ml-4">
-                    {{ __('Register') }}
+                    {{ __('会員登録') }}
                 </x-button>
             </div>
+        </form>
         </form>
     </x-auth-card>
 </x-guest-layout>
