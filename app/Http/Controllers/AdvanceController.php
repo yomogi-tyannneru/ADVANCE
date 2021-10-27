@@ -19,15 +19,17 @@ class AdvanceController extends Controller
             'password' => $request->password,
             'punch_in' => $request->punch_in,
             'punch_out' => $request->punch_out,
-            
+            'break_start' => $request->break_start,
+            'break_end' => $request->break_end,
         ];
         DB::insert('insert into workers (name, email, password, punch_in, punch_out) values (:name, :email, :password, :punch_in, :punch_out)', $param);
+        DB::insert('insert into times ( break_start, break_end) values (:break_start, :break_end)', $param);
         return redirect('/');
     }
     //会員登録ページ
     public function register(Request $request)
     {
-         $this->validate($request, Advance::$rules);
+        $this->validate($request, Advance::$rules);
         $param = [
             'name' => $request->name,
             'email' => $request->email,
@@ -38,9 +40,7 @@ class AdvanceController extends Controller
             'break_end' => $request->break_end,
         ];
         DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        DB::insert('insert into times ( break_start, break_end) values (:break_start, :break_end)', $param);
         return redirect('/');
-        
     }
     //ログインページ
     public function sending(Request $request)
@@ -48,16 +48,14 @@ class AdvanceController extends Controller
         $this->validate($request, Advance::$rules);
         $param = [
             'name' => $request->name,
-            'mail' => $request->mail,
+            'email' => $request->email,
             'password' => $request->password,
             'punch_in' => $request->punch_in,
             'punch_out' => $request->punch_out,
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
         ];
-        DB::insert('insert into workers (name, mail, password, punch_in, punch_out, break_start, break_end) values (:name, :mail, :password, :punch_in, :punch_out, :break_start, :break_end)', $param);
-        return redirect('/');
-        DB::insert('insert into times (name, mail, password, punch_in, punch_out, break_start, break_end) values (:name, :mail, :password, :punch_in, :punch_out, :break_start, :break_end)', $param);
+        DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
         return redirect('/');
         
     }
