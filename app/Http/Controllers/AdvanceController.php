@@ -10,7 +10,7 @@ use App\Models\Advance;
 class AdvanceController extends Controller
 {
     //打刻ページ
-    public function index(Request $request)
+    public function timesget(Request $request)
     {
         $this->validate($request, Advance::$rules);
         $param = [
@@ -22,10 +22,25 @@ class AdvanceController extends Controller
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
         ];
-        DB::insert('insert into workers (name, email, password, punch_in, punch_out) values (:name, :email, :password, :punch_in, :punch_out)', $param);
-        DB::insert('insert into times ( break_start, break_end) values (:break_start, :break_end)', $param);
+        DB::insert('insert into times (punch_in, punch_out) values (:punch_in, :punch_out)', $param);
         return redirect('/');
     }
+    public function restsget(Request $request)
+    {
+        $this->validate($request, Advance::$rules);
+        $param = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'punch_in' => $request->punch_in,
+            'punch_out' => $request->punch_out,
+            'break_start' => $request->break_start,
+            'break_end' => $request->break_end,
+        ];
+        DB::insert('insert into rests (break_start, break_end) values (:break_start, :break_end)', $param);
+        return views(‘index’);
+    }
+
     //会員登録ページ
     public function register(Request $request)
     {
@@ -40,7 +55,7 @@ class AdvanceController extends Controller
             'break_end' => $request->break_end,
         ];
         DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        return redirect('/');
+        return view(‘index’);
     }
     //ログインページ
     public function sending(Request $request)

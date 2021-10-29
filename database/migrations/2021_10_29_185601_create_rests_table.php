@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateWorkersTable extends Migration
+class CreateRestsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateWorkersTable extends Migration
      */
     public function up()
     {
-        Schema::create('workers', function (Blueprint $table) {
+        Schema::create('rests', function (Blueprint $table) {
             $table->id()->unsigned();
-            $table->string('name');
-            $table->string('email');
-            $table->string('password');
+            $table->foreignId('worker_id')->constrained('workers')->onDelete('cascade');
+            $table->time('break_start')->nullable();
+            $table->time('break_end')->nullable();
         });
     }
 
@@ -28,6 +28,6 @@ class CreateWorkersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('workers');
+        Schema::dropIfExists('rests');
     }
 }

@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdvanceController;
 
 //打刻ページ
-Route::post('/', [AdvanceController::class, 'index']);
-Route::get('/', [AdvanceController::class, 'index']);
+Route::get('/', [AdvanceController::class, 'timesget','restsget']);
+
 
 //会員登録ページ
 
