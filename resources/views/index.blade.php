@@ -78,7 +78,7 @@ body {
 /*--------------------- stamp--------------------- */
 .service {
   padding: 20px 160px 100px;
-  background-color: #DCDCDC;
+    background-color: #f1eeee;
 }
 
 .service-title {

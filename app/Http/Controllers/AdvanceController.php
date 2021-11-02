@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Advance;
+use Carbon\Carbon;
 
 class AdvanceController extends Controller
 {
@@ -22,8 +23,11 @@ class AdvanceController extends Controller
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
         ];
-        DB::insert('insert into times (punch_in, punch_out) values (:punch_in, :punch_out)', $param);
-        return redirect('/');
+        
+        DB::table(‘times’)->insert(
+        [‘punch_in’ => Carbon::now(), ‘punch_out’ => Carbon::now()]
+        );
+        return redirect('/attendance');
     }
     public function restsget(Request $request)
     {
