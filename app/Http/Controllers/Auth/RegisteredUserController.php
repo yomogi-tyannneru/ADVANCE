@@ -33,6 +33,19 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, Advance::$rules);
+        $param = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
+            'punch_in' => $request->punch_in,
+            'punch_out' => $request->punch_out,
+            'break_start' => $request->break_start,
+            'break_end' => $request->break_end,
+        ];
+        DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
+
+
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],

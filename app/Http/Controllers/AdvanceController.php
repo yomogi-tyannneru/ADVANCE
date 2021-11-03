@@ -79,7 +79,7 @@ class AdvanceController extends Controller
         
     }
     //日付別勤怠ページ
-    public function management(Request $request)
+    public function attendance(Request $request)
     {
         $this->validate($request, Advance::$rules);
         $param = [
