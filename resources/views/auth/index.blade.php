@@ -143,7 +143,9 @@ body {
             <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
           </li>
           <li>
+            <form method="POST" action="{{ route('user.logout') }}" name='$name' value='$name' >
             <a href="{{ route('user.logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a>
+            </form>
           </li>
         </ul>
       </nav>

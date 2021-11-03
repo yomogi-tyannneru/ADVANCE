@@ -15,19 +15,16 @@ class AdvanceController extends Controller
     {
         $this->validate($request, Advance::$rules);
         $param = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
+            
             'punch_in' => $request->punch_in,
             'punch_out' => $request->punch_out,
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
-        ];
-        
-        DB::table(‘times’)->insert(
-        [‘punch_in’ => Carbon::now(), ‘punch_out’ => Carbon::now()]
+            ];
+        DB::table('times')->insert(
+        ['punch_in' => Carbon::now(), 'punch_out' => Carbon::now()]
         );
-        return redirect('/attendance');
+        dd($param);
     }
     public function restsget(Request $request)
     {
@@ -40,9 +37,13 @@ class AdvanceController extends Controller
             'punch_out' => $request->punch_out,
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
-        ];
-        DB::insert('insert into rests (break_start, break_end) values (:break_start, :break_end)', $param);
-        return views(‘index’);
+            ];
+        DB::table('times')->insert(
+        ['break_start' => Carbon::now(), 'break_end' => Carbon::now()]
+        );
+        return redirect('/');
+        
+        
     }
 
     //会員登録ページ
