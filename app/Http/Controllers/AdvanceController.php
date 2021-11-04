@@ -15,16 +15,19 @@ class AdvanceController extends Controller
     {
         $this->validate($request, Advance::$rules);
         $param = [
-            
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => $request->password,
             'punch_in' => $request->punch_in,
             'punch_out' => $request->punch_out,
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
             ];
+            dd($param);
         DB::table('times')->insert(
         ['punch_in' => Carbon::now(), 'punch_out' => Carbon::now()]
         );
-        dd($param);
+        
     }
     public function restsget(Request $request)
     {
@@ -41,7 +44,7 @@ class AdvanceController extends Controller
         DB::table('times')->insert(
         ['break_start' => Carbon::now(), 'break_end' => Carbon::now()]
         );
-        return redirect('/');
+        return redirect('auth'>'index');
         
         
     }
