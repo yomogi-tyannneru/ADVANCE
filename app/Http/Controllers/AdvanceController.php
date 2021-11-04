@@ -11,6 +11,11 @@ use Carbon\Carbon;
 class AdvanceController extends Controller
 {
     //打刻ページ
+    public function kari(Request $request)
+    {
+        return view('auth'>'index');
+    }
+
     public function timesget(Request $request)
     {
         $this->validate($request, Advance::$rules);
@@ -23,11 +28,10 @@ class AdvanceController extends Controller
             'break_start' => $request->break_start,
             'break_end' => $request->break_end,
             ];
-            dd($param);
         DB::table('times')->insert(
         ['punch_in' => Carbon::now(), 'punch_out' => Carbon::now()]
         );
-        
+        return redirect('auth'>'index');
     }
     public function restsget(Request $request)
     {
