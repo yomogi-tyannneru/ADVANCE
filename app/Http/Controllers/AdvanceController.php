@@ -13,7 +13,7 @@ class AdvanceController extends Controller
     //打刻ページ
     public function kari(Request $request)
     {
-        return view('auth'>'index');
+        return view('auth.index');
     }
 
     public function timesget(Request $request)
@@ -31,7 +31,7 @@ class AdvanceController extends Controller
         DB::table('times')->insert(
         ['punch_in' => Carbon::now(), 'punch_out' => Carbon::now()]
         );
-        return redirect('auth'>'index');
+        return redirect('auth.index');
     }
     public function restsget(Request $request)
     {
@@ -48,7 +48,7 @@ class AdvanceController extends Controller
         DB::table('times')->insert(
         ['break_start' => Carbon::now(), 'break_end' => Carbon::now()]
         );
-        return redirect('auth'>'index');
+        return redirect('auth.index');
         
         
     }
@@ -67,7 +67,7 @@ class AdvanceController extends Controller
             'break_end' => $request->break_end,
         ];
         DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        return view(‘index’);
+        return view('auth.index');
     }
     //ログインページ
     public function sending(Request $request)
@@ -83,7 +83,7 @@ class AdvanceController extends Controller
             'break_end' => $request->break_end,
         ];
         DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        return redirect('/');
+        return view('auth.index');
         
     }
     //日付別勤怠ページ
