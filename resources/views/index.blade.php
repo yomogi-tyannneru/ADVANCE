@@ -143,7 +143,7 @@ body {
             <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
           </li>
           <li>
-            <a href="{{ route('user.logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a>
+            <a href="{{ route('logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a>
           </li>
         </ul>
       </nav>

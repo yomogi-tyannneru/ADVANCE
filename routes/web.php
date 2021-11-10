@@ -4,9 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdvanceController;
 
 //打刻ページ
-Route::get('/', [AdvanceController::class, 'kari']);
-Route::post('/', [AdvanceController::class, 'timesget']);
-Route::post('/', [AdvanceController::class, 'restsget']);
+Route::get('/', [AdvanceController::class, 'index'])->middleware('auth')->name('index');
+Route::post('/punch_in', [AdvanceController::class, 'punchIn'])->name('punch_in');
+Route::post('/punch_out', [AdvanceController::class, 'punchOut'])->name('punch_out');
+Route::post('/break_start', [AdvanceController::class, 'breakStart'])->name('break_start');
+Route::post('/break_end', [AdvanceController::class, 'breakEnd'])->name('break_end');
 
 
 //会員登録ページ

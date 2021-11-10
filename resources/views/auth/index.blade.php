@@ -143,26 +143,30 @@ body {
             <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
           </li>
           <li>
-            <form method="POST" action="{{ route('user.logout') }}" name='$name' value='$name' >
-            <a href="{{ route('user.logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a>
+            <form method="POST" action="{{ route('logout') }}" name='$name' value='$name' >
+              @csrf
+              <button type="submit" class="header__nav-list-link">ログアウト</button>
+            <!-- <a href="{{ route('logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a> -->
             </form>
           </li>
         </ul>
       </nav>
     </header>
   <div class="service">
-    <p class="service-title">福場凛太郎（nameがくる）さんお疲れさまです！</p>
+    <!-- <p class="service-title">福場凛太郎（nameがくる）さんお疲れさまです！</p> -->
+    <p class="service-title">{{ $user->name }} さんお疲れさまです！</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
-        <form action="/" class="form" name="punch_in" method="POST">
+        <form action="{{ route('punch_in') }}" class="form" name="punch_in" method="POST">
           @csrf
           <div class="form-item">
           <input type="submit" name="punch_in" value="勤務開始" class="form-btn">
+          <input type="hidden" name="id" value="punch_in" />
           </div>
         </form>
       </div>
       <div class="service_png-positiondiv">
-        <form action="/" class="form" name="punch_out" method="POST">
+        <form action="{{ route('punch_out') }}" class="form" name="punch_out" method="POST">
           @csrf
           <div class="form-item">
           <input type="submit" name="punch_out" value="勤務終了" class="form-btn">
@@ -170,7 +174,7 @@ body {
         </form>
       </div>
       <div class="service_png-positiondiv">
-        <form action="/" class="form" name="break_start" method="POST">
+        <form action="{{ route('break_start') }}" class="form" name="break_start" method="POST">
           @csrf
           <div class="form-item">
           <input type="submit" name="break_start" value="休憩開始" class="form-btn">
@@ -178,7 +182,7 @@ body {
         </form>
       </div>
       <div class="service_png-positiondiv">
-        <form action="/" class="form" name="break_end" method="POST">
+        <form action="{{ route('break_end') }}" class="form" name="break_end" method="POST">
           @csrf
           <div class="form-item">
           <input type="submit" name="break_end" value="休憩終了" class="form-btn">

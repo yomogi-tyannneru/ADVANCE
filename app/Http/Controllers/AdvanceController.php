@@ -11,80 +11,137 @@ use Carbon\Carbon;
 class AdvanceController extends Controller
 {
     //打刻ページ
-    public function kari(Request $request)
+    public function index(Request $request)
     {
-        return view('auth.index');
+        $user = Auth::user();
+        return view('auth.index', compact('user'));
     }
 
-    public function timesget(Request $request)
+    // 出勤処理
+    public function punchIn(Request $request)
     {
-        $this->validate($request, Advance::$rules);
-        $param = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'punch_in' => $request->punch_in,
-            'punch_out' => $request->punch_out,
-            'break_start' => $request->break_start,
-            'break_end' => $request->break_end,
-            ];
+        $today = new Carbon('today');
+        $data = DB::table('times')
+            ->where('user_id', Auth::user()['id'])
+            ->whereDate('date', $today)
+            ->get()
+            ->first();
+            
+        if ($data) {
+            // すでに出勤ボタンを押しているためエラーを表示させて打刻ページに戻す（エラーメッセージをセットする）
+            return redirect(route('index'));
+        }
+
+        // 出勤データの登録処理
         DB::table('times')->insert(
-        ['punch_in' => Carbon::now(), 'punch_out' => Carbon::now()]
+            [
+                'user_id' => Auth::user()['id'],
+                'date' => Carbon::now(),
+                'punch_in' => Carbon::now()
+            ]
         );
-        return redirect('auth.index');
-    }
-    public function restsget(Request $request)
-    {
-        $this->validate($request, Advance::$rules);
-        $param = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'punch_in' => $request->punch_in,
-            'punch_out' => $request->punch_out,
-            'break_start' => $request->break_start,
-            'break_end' => $request->break_end,
-            ];
-        DB::table('times')->insert(
-        ['break_start' => Carbon::now(), 'break_end' => Carbon::now()]
-        );
-        return redirect('auth.index');
-        
-        
+        // 処理成功のメッセージをセット
+        // ...
+
+        return redirect(route('index'));
     }
 
-    //会員登録ページ
-    public function register(Request $request)
+    // 退勤処理
+    public function punchOut(Request $request)
     {
-        $this->validate($request, Advance::$rules);
-        $param = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'punch_in' => $request->punch_in,
-            'punch_out' => $request->punch_out,
-            'break_start' => $request->break_start,
-            'break_end' => $request->break_end,
-        ];
-        DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        return view('auth.index');
+        $today = new Carbon('today');
+        $data = DB::table('times')
+            ->where('user_id', Auth::user()['id'])
+            ->whereDate('date', $today)
+            ->whereNull('punch_out')
+            ->get()
+            ->first();
+            // 休憩開始後、休憩終了前に退勤が出来ないように実装つまり退勤ボタンも変更する
+            // 日付が変わると退勤できない　昨日の出勤も感知するように　あり退勤されていない場合
+        if (!$data) {
+            // 退勤処理をする条件が整っていないためエラーを表示させて打刻ページに戻す（エラーメッセージをセットする）
+            return redirect(route('index'));
+        }
+
+        // 退勤データの更新処理
+        DB::table('times')
+            ->where('id', $data->id)
+            ->update(['punch_out' => Carbon::now()]);
+        // 処理成功のメッセージをセット
+        // ...dash~で確認
+
+        return redirect(route('index'));
     }
-    //ログインページ
-    public function sending(Request $request)
+
+    // 休憩開始処理
+    public function breakStart(Request $request)
     {
-        $this->validate($request, Advance::$rules);
-        $param = [
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-            'punch_in' => $request->punch_in,
-            'punch_out' => $request->punch_out,
-            'break_start' => $request->break_start,
-            'break_end' => $request->break_end,
-        ];
-        DB::insert('insert into workers (name, email, password) values (:name, :email, :password)', $param);
-        return view('auth.index');
+        $now = new Carbon('now')//今日の休憩開始、勤務終了を取得
+            ->where('break_start')
+            ->where('punch_out');
+        $data2 = DB::table('rests')
+            ->where('user_id', Auth::user()['id'])
+            ->whereDate('date', $now)
+            ->get()
+            ->first();
         
+
+            // 休憩開始ボタンを押せる条件
+            // 勤務開始のみがある場合と休憩が終了している場合
+
+            // 休憩開始ボタンを押せない条件
+            // 今日の勤務開始がないまたは勤務終了がある場合、リダイレクト
+
+            // 実装する場合の処理
+            // //今日の休憩開始、勤務終了を取得した場合where(カラムを指定?）と勤務開始を取得できなかった場合リダイレクトする　それ以外の場合何度も打てるように
+        
+
+            // 1日で何度も休憩が可能　todayを変える？→結果　だめ
+
+
+        if ($data2) {
+            // すでに休憩開始ボタンを押しているためエラーを表示させて打刻ページに戻す（エラーメッセージをセットする）
+            
+            return redirect(route('index'));
+        }
+
+        // 休憩開始データの登録処理
+        DB::table('rests')->insert(
+            [
+                'user_id' => Auth::user()['id'],// 現在認証されているユーザーIDの取得
+                'date' => Carbon::now(),
+                'break_start' => Carbon::now()
+            ]
+        );
+        // 処理成功のメッセージをセット
+        // ...
+
+        return redirect(route('index'));
+    }
+
+    // 休憩終了処理
+    public function breakEnd(Request $request)
+    {
+        $today = new Carbon('today');
+        $data = DB::table('rests')
+            ->where('user_id', Auth::user()['id'])
+            ->whereDate('date', $today)
+            ->whereNull('break_end')
+            ->get()
+            ->first();
+        if (!$data) {
+            // 休憩終了処理をする条件が整っていないためエラーを表示させて打刻ページに戻す（エラーメッセージをセットする）
+            return redirect(route('index'));
+        }
+
+        // 休憩終了データの更新処理
+        DB::table('rests')
+            ->where('id', $data->id)
+            ->update(['break_end' => Carbon::now()]);
+        // 処理成功のメッセージをセット
+        // ...
+
+        return redirect(route('index'));
     }
     //日付別勤怠ページ
     public function attendance(Request $request)

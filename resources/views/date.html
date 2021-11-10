@@ -105,13 +105,12 @@
     font-size: 18px;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
-    border-collapse: separate;
+    border-collapse: collapse;
   }
-
-  th,td{
+  /* th,td{
     border-bottom: 1px solid black;
     
-  }
+  } */
   tr {
     border-bottom: 1px solid black;
   }
@@ -178,21 +177,24 @@
           @csrf
           <div class="form-item">
             <table class="form-item1">
-              <tr class="form-item2">
-                <th class="form-item3">名前</th>
-                <th>勤務開始</th>
-                <th>勤務終了</th>
-                <th>休憩開始</th>
-                <th>休憩終了</th>
-              </tr>
-              <tr class="form-item2">
-                
-                <td>名前</td>
-                <td>勤務開始</td>
-                <td>勤務終了</td>
-                <td>休憩開始</td>
-                <td>休憩終了</td>
-              </tr>
+              <thead>
+                <tr>
+                  <th class="form-item3">名前</th>
+                  <th>勤務開始</th>
+                  <th>勤務終了</th>
+                  <th>休憩開始</th>
+                  <th>休憩終了</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>名前</td>
+                  <td>勤務開始</td>
+                  <td>勤務終了</td>
+                  <td>休憩開始</td>
+                  <td>休憩終了</td>
+                </tr>
+              </tbody>
               
             </table>
           </div>
