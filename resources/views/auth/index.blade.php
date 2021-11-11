@@ -153,7 +153,6 @@ body {
       </nav>
     </header>
   <div class="service">
-    <!-- <p class="service-title">福場凛太郎（nameがくる）さんお疲れさまです！</p> -->
     <p class="service-title">{{ $user->name }} さんお疲れさまです！</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">

@@ -53,20 +53,7 @@ class AdvanceController extends Controller
         $data = DB::table('times')
             ->where('user_id', Auth::user()['id'])
             ->whereDate('date', $today)
-            ->get()
-            ->first();
-        $yesterday = new Carbon('yesterday');
-        // $data2 = DB::table('times')
-        //     ->where('user_id', Auth::user()['id'])
-        //     ->whereDate('date', $yesterday)
-        //     ->where('punch_in')
-        //     ->get()
-        //     ->first();
-        // $today = new Carbon('today');
-        $data3 = DB::table('rests')
-            ->where('user_id', Auth::user()['id'])
-            ->whereDate('date', $today)
-            ->where('break_end')
+            ->whereNull('punch_out')
             ->get()
             ->first();
             // 休憩開始後、休憩終了前に退勤が出来ないように実装つまり退勤ボタンも変更する
@@ -92,7 +79,7 @@ class AdvanceController extends Controller
         $now = new Carbon('now');//今日の休憩開始、勤務終了を取得
             // ->where('break_start')
             // ->where('punch_out');
-        $data4 = DB::table('rests')
+        $data2 = DB::table('rests')
             ->where('user_id', Auth::user()['id'])
             ->whereDate('date', $now)
             ->get()
@@ -112,7 +99,7 @@ class AdvanceController extends Controller
             // 1日で何度も休憩が可能　todayを変える？→結果　だめ
 
 
-        if ($data4) {
+        if ($data2) {
             // すでに休憩開始ボタンを押しているためエラーを表示させて打刻ページに戻す（エラーメッセージをセットする）
             
             return redirect(route('index'));

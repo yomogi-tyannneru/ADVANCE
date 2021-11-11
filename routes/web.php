@@ -16,9 +16,9 @@ Route::post('/break_end', [AdvanceController::class, 'breakEnd'])->name('break_e
 //ログインページ
 
 //日付別勤怠ページ
-Route::get('/attendance', [AdvanceController::class, 'attendance']);
+Route::get('/attendance', [AdvanceController::class, 'attendance'])->name('attendance');
 
 require __DIR__.'/auth.php';
 
-Route::get('/auth', [AuthorController::class,'check']);
-Route::post('/auth', [AuthorController::class,'checkUser']);
+// Route::get('/auth', [AuthorController::class,'check']);
+// Route::post('/auth', [AuthorController::class,'checkUser']);
