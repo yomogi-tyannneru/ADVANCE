@@ -265,14 +265,16 @@ class AdvanceController extends Controller
                 }
             }
         }
-         $items = Auth::Paginate(5);
-        return view('auth.attendance', ['items' => $items]);
+        // $items = Auth::paginate(5);
+        // return view('auth.attendance', ['items' => $items]);
 
-        // return view('auth.attendance', compact('times_data'));
+        return view('auth.attendance', compact('times_data'));
 
-        // return view('user.index', [
-        //     'users' => DB::table('users')->paginate(5)
-        // ]);
+        $users = User::paginate(5);
+
+        return view('auth.attendance', [
+            'users' => $users->paginate(5)
+        ]);
     }
 
     private function time_diff($time_from, $time_to) 

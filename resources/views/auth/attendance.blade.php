@@ -199,22 +199,12 @@ body {
             </table>
           </div>
         </form>
-        @section('content')
-<table>
-  <tr>
-    <th>Data</th>
-  </tr>
-  @foreach ($items as $item)
-  <tr>
-    <td>
-      {{$item->getDetail()}}
-    </td>
-  </tr>
-  @endforeach
-</table>
-{{ $items->links() }}
-@endsection
-       
+        <div class="container">
+          @foreach ($users as $user)
+          {{ $user->name }}
+          @endforeach
+        </div>
+        {{ $users->links() }}
       </div>
     </div>
   </div>
