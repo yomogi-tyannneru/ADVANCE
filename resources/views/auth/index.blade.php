@@ -74,6 +74,22 @@ body {
   cursor: pointer;
 }
 
+.header__nav-list-link1 {
+  height: 70px;
+  display: inline-block;
+  background: none;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+
+.header__nav-list-link1:hover {
+  filter: opacity(70%);
+  cursor: pointer;
+}
+
 
 /*--------------------- stamp--------------------- */
 .service {
@@ -128,6 +144,7 @@ body {
   font-size: 16px;
   text-align: center;
   font-weight: bolder;
+  
 }
 </style>
 <body>
@@ -145,7 +162,7 @@ body {
           <li>
             <form method="POST" action="{{ route('logout') }}" name='$name' value='$name' >
               @csrf
-              <button type="submit" class="header__nav-list-link">ログアウト</button>
+              <button type="submit" class="header__nav-list-link1">ログアウト</button>
             <!-- <a href="{{ route('logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a> -->
             </form>
           </li>
@@ -196,7 +213,7 @@ body {
       </div>
     </div>
   </div>
-  
+
   <p class="service-title2">Atte,inc.</p>
 </body>
 

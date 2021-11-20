@@ -202,6 +202,7 @@ body {
         <div class="container">
           @foreach ($users as $user)
           {{ $user->name }}
+          {{ $date->date }}
           @endforeach
         </div>
         {{ $users->links() }}

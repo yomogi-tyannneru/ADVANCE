@@ -268,13 +268,27 @@ class AdvanceController extends Controller
         // $items = Auth::paginate(5);
         // return view('auth.attendance', ['items' => $items]);
 
-        return view('auth.attendance', compact('times_data'));
-
-        $users = User::paginate(5);
-
-        return view('auth.attendance', [
-            'users' => $users->paginate(5)
+        // $users = User::paginate(1);
+        $users = User::select([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Hash::make($request->password),
         ]);
+        // $date1 = DB::table('rests')->paginate(1);
+        // $date = Rests::paginate(1);
+
+        // 出勤データの取得処理
+$times_data = DB::table('times')
+    ->leftJoin('users', 'users.id', '=', 'times.user_id')
+    ->select('times.*', 'users.name')
+    ->paginate(5);
+
+
+        return view('auth.attendance', compact('times_data','users'));
+
+        
+
+        // return view('auth.attendance')->with(['users' => $users]);
     }
 
     private function time_diff($time_from, $time_to) 
