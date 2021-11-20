@@ -235,6 +235,7 @@ class AdvanceController extends Controller
 
         // 出勤データの取得処理
         $times_data = DB::table('times')
+        //timesテーブルのtimes.user_idとusersテーブルのusers.idをくっつける
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->get();
@@ -265,15 +266,8 @@ class AdvanceController extends Controller
                 }
             }
         }
-        // $items = Auth::paginate(5);
-        // return view('auth.attendance', ['items' => $items]);
-
-        // $users = User::paginate(1);
-        $users = User::select([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => \Hash::make($request->password),
-        ]);
+        // すべてのユーザー情報を取得
+        $users = User::get();
         // $date1 = DB::table('rests')->paginate(1);
         // $date = Rests::paginate(1);
 
