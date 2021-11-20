@@ -187,11 +187,11 @@ body {
               <tbody>
                 @foreach ($times_data as $data)
                   <tr>
-                    <td>{{ $data['name'] }}</td>
+                    <td>{{ Auth::user()['name'] }}</td>
                     <td>{{ $data['date'] }}</td>
                     <td>{{ $data['punch_in'] }}</td>
                     <td>{{ $data['punch_out'] ?? '--:--:--' }}</td>
-                    <td>{{ $data['rest_time'] }}</td>
+                    <td>{{ '計算部分' }}</td>
                     <td>{{ $data['work_time'] ?? '--:--:--' }}</td>
                   </tr>
                 @endforeach
@@ -199,22 +199,7 @@ body {
             </table>
           </div>
         </form>
-        @section('content')
-<table>
-  <tr>
-    <th>Data</th>
-  </tr>
-  @foreach ($items as $item)
-  <tr>
-    <td>
-      {{$item->getDetail()}}
-    </td>
-  </tr>
-  @endforeach
-</table>
-{{ $items->links() }}
-@endsection
-       
+        ページめくり
       </div>
     </div>
   </div>

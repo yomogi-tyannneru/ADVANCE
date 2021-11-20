@@ -154,6 +154,12 @@ body {
     </header>
   <div class="service">
     <p class="service-title">{{ $user->name }} さんお疲れさまです！</p>
+    @if (session('error_message'))
+      <p class="service-title" style="color: red;">{{ session('error_message') }}</p>
+    @endif
+    @if (session('success_message'))
+      <p class="service-title" style="color: green;">{{ session('success_message') }}</p>
+    @endif
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="{{ route('punch_in') }}" class="form" name="punch_in" method="POST">
