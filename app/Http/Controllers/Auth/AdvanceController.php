@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Advance;
 use Carbon\Carbon;
+use App\Models\User;
+use \Hash;
+
 
 class AdvanceController extends Controller
 {

@@ -52,7 +52,7 @@ class AdvanceController extends Controller
     {
         $today = new Carbon('today');
 
-        // 当日以前の出勤のみのデータを取得 
+        // 当日以前の出勤のみのデータを取得
         $times_data = DB::table('times')
             ->where('user_id', Auth::user()['id'])
             ->whereNotNull('punch_in')
@@ -129,7 +129,7 @@ class AdvanceController extends Controller
 
         $now = new Carbon('now');//今日の休憩開始、勤務終了を取得
 
-        // 当日以前の出勤のみのデータを取得 
+        // 当日以前の出勤のみのデータを取得
         $data = DB::table('times')
             ->where('user_id', Auth::user()['id'])
             ->whereNotNull('punch_in')
@@ -165,7 +165,6 @@ class AdvanceController extends Controller
 
             // 実装する場合の処理
             // //今日の休憩開始、勤務終了を取得した場合where(カラムを指定?）と勤務開始を取得できなかった場合リダイレクトする　それ以外の場合何度も打てるように
-        
 
             // 1日で何度も休憩が可能　todayを変える？→結果　だめ
 
@@ -267,7 +266,8 @@ class AdvanceController extends Controller
             }
         }
         // すべてのユーザー情報を取得
-        $users = User::get();
+        // $users = User::get();
+        User::get()->toArray();
         // $date1 = DB::table('rests')->paginate(1);
         // $date = Rests::paginate(1);
 
@@ -280,18 +280,18 @@ $times_data = DB::table('times')
 
         return view('auth.attendance', compact('times_data','users'));
 
-        
+
 
         // return view('auth.attendance')->with(['users' => $users]);
     }
 
-    private function time_diff($time_from, $time_to) 
+    private function time_diff($time_from, $time_to)
     {
         $time = $time_to - $time_from;
         return gmdate("H:i:s", $time);
     }
 
-    private function time_plus($time_from, $time_to) 
+    private function time_plus($time_from, $time_to)
     {
         $time = $time_to + $time_from;
         return gmdate("H:i:s", $time);
@@ -330,9 +330,9 @@ $times_data = DB::table('times')
 
         return view('auth.attendance', compact('times_data'));
     }
-    
 
-    private function time_diff2($time_from, $time_to) 
+
+    private function time_diff2($time_from, $time_to)
     {
         $time = $time_to - $time_from;
         return gmdate("H:i:s", $time);

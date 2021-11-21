@@ -77,6 +77,9 @@ body {
 .header__nav-list-link1 {
   height: 70px;
   display: inline-block;
+  font-size: 18px;
+  font-weight: bold;
+  padding-bottom: 38px;
   background: none;
 	border: none;
 	outline: none;
