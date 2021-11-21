@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Advance;
+use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Models\User;
 
@@ -229,7 +229,7 @@ class AdvanceController extends Controller
         $user = User::select([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => \Hash::make($request->password),
+            'password' => Hash::make($request->password),
         ]);
 
         // 出勤データの取得処理
@@ -267,7 +267,8 @@ class AdvanceController extends Controller
         }
         // すべてのユーザー情報を取得
         // $users = User::get();
-        User::get()->toArray();
+        $users = User::get()->toArray();
+        
         // $date1 = DB::table('rests')->paginate(1);
         // $date = Rests::paginate(1);
 
@@ -303,7 +304,7 @@ $times_data = DB::table('times')
         $user = User::select([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => \Hash::make($request->password),
+            'password' => Hash::make($request->password),
         ]);
 
         // 出勤データの取得処理
