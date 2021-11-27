@@ -151,9 +151,8 @@
       font-size: 18px;
       border-bottom: 1px solid black;
       border-top: 1px solid black;
-      text-align: center;
-      /* 線がつく */
       border-collapse: collapse;
+      text-align: center;
     }
 
     th,
@@ -166,68 +165,48 @@
     }
   </style>
 
-
-  <header class="header flex__item">
-    <a class="header__nav-list-link header-title">Atte</a>
-    <nav class="header__nav">
-      <ul class="header__nav-list flex__item">
-        <li>
-          <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
-        </li>
-        <li>
-          <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
-        </li>
-        <li>
-          <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
-            @csrf
-            <button type="submit" class="header__nav-list-link1">ログアウト</button>
-          </form>
-        </li>
-      </ul>
-    </nav>
-  </header>
-  <div class="service">
-    <p class="service-title">{{ $latest_punch_in_data->date }}</p>
-    <div class="service_png-position">
-      <div class="service_png-positiondiv">
-        <form action="/" class="form" name="punch_in" method="POST">
-          @csrf
+    <header class="header flex__item">
+      <a class="header__nav-list-link header-title">Atte</a>
+      <nav class="header__nav">
+        <ul class="header__nav-list flex__item">
+          <li>
+            <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
+          </li>
+          <li>
+            <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
+          </li>
+          <li>
+            <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
+              @csrf
+              <button type="submit" class="header__nav-list-link1">ログアウト</button>
+            </form>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <div class="service">
+      <p class="service-title">ユーザー一覧</p>
+      <div class="service_png-position">
+        <div class="service_png-positiondiv">
           <div class="form-item">
             <table class="form-item1">
               <thead>
                 <tr>
                   <th class="form-item3">名前</th>
-                  <th>日付</th>
-                  <th>勤務開始</th>
-                  <th>勤務終了</th>
-                  <th>休憩時間</th>
-                  <th>勤務時間</th>
                 </tr>
               </thead>
-
               <tbody>
-
-                @foreach ($times_data as $data)
+                @foreach ($users as $user)
                 <tr>
-                  <td>{{ $data->name }}</td>
-                  <td>{{ $data->date }}</td>
-                  <td>{{ $data->punch_in }}</td>
-                  <td>{{ $data->punch_out ?? '--:--:--' }}</td>
-                  <td>{{ $data->rest_time ?? '--:--:--' }}</td>
-                  <td>{{ $data->work_time ?? '--:--:--' }}</td>
+                  <td><a href="{{ route('user.show', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
                 </tr>
                 @endforeach
-
               </tbody>
             </table>
           </div>
-          {{ $times_data->links() }}
-          @if (session('error_message'))
-          <p class="service-title" style="color: red;">{{ session('error_message') }}</p>
-          @endif
-        </form>
+          {{ $users->links() }}
+        </div>
       </div>
     </div>
-  </div>
-  <p class="service-title2">Atte,inc.</p>
+    <p class="service-title2">Atte,inc.</p>
 </x-app-layout>

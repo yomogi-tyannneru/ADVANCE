@@ -33,22 +33,31 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
+        // バリデーション
         $request->validate([
+            // required　リクエストされたか？　必須
+            // string　文字か？
+            // max:255　最大255文字
+            // email　メールアドレスの形かどうか？
+            // unique:users　usersテーブルの中に同じemailがあったらダメ
+            // confirmed　確認用のフォームがはいっているかどうか？
+            // Rules\Password::defaults()　文字数制限
+            // VSCODEの機能で記述先に飛べるというのがある
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
-
+        // ユーザーの新規登録の処理
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
-
+        // データーベースに入れてる
         event(new Registered($user));
-
+        // $userをログイン
         Auth::login($user);
-
+        
         return redirect(RouteServiceProvider::HOME);
     }
 }

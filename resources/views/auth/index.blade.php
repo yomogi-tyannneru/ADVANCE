@@ -166,7 +166,6 @@ body {
             <form method="POST" action="{{ route('logout') }}" name='$name' value='$name' >
               @csrf
               <button type="submit" class="header__nav-list-link1">ログアウト</button>
-            <!-- <a href="{{ route('logout') }}" class="header__nav-list-link" style="color:black;">ログアウト</a> -->
             </form>
           </li>
         </ul>

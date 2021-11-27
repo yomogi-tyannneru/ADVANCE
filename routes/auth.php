@@ -60,7 +60,8 @@ Route::get('/confirm-password', [ConfirmablePasswordController::class, 'show'])
 
 Route::post('/confirm-password', [ConfirmablePasswordController::class, 'store'])
                 ->middleware('auth');
-
+//ログアウト
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->middleware('auth')
+                //ログアウト機能を表すname
                 ->name('logout');

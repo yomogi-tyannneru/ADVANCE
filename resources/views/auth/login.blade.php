@@ -44,13 +44,14 @@
 
         /*--------------------- stamp--------------------- */
         .service {
-            padding: 20px 160px 100px;
+            padding: 20px 160px 300px;
             background-color: #f1eeee;
         }
 
         .service-title {
-            font-size: 22px;
+            font-size: 24px;
             text-align: center;
+            margin-top: 60px;
             margin-bottom: 30px;
             font-weight: bolder;
         }
@@ -119,6 +120,13 @@
             display: flex;
             justify-content: center;
         }
+
+        .service-title2 {
+            font-size: 16px;
+            text-align: center;
+            font-weight: bolder;
+            padding: 10px;
+        }
     </style>
 
     <!-- Session Status -->
@@ -128,16 +136,16 @@
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
     <!-- <form method="POST" action="{{ route('login') }}">
-        @csrf
+        @csrf-->
 
-        <!-- Email Address -->
+    <!-- Email Address -->
     <!-- <div>
             <x-label for="email" :value="__('Email')" />
 
             <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-        </div>
+        </div>-->
 
-        <!-- Password -->
+    <!-- Password -->
     <!-- <div class="mt-4">
             <x-label for="password" :value="__('Password')" />
 
@@ -173,7 +181,7 @@
             <a class="header__nav-list-link header-title">Atte</a>
         </header>
         <div class="service">
-            <p class="service-title">会員登録</p>
+            <p class="service-title">ログイン</p>
             <div class="service_png-position">
                 <div class="service_png-positiondiv">
                     <form method="POST" action="{{ route('login') }}">
@@ -181,6 +189,7 @@
                         <!-- Email Address -->
                         <div class="form-item">
                             <x-input id="email" type="email" name="email" :value="old('email')" placeholder="メールアドレス" class="form-btn" required autofocus />
+                            <!-- なぜvalueがフロントに表示されないのか？ -->
                         </div>
 
                         <!-- Password -->
@@ -194,22 +203,21 @@
 
                         </div>
                         <div class="form-item">
-                            <input type="submit" name="password" value="password" placeholder="パスワード" class="form-btn"> -->
-
-                        <!-- </div> -->
+                            <input type="submit" name="password" value="password" placeholder="パスワード" class="form-btn">
+                        </div> -->
                         <div class="form-item">
-                            <input type="submit" value="ログイン" placeholder="ログイン" class="form-btn1">
-                            {{ __('Log in') }}
-                            <x-button class="ml-3">
-                                {{ __('Log in') }}
+                            <x-button value="ログイン" placeholder="ログイン" class="form-btn1">
+                                {{ __('ログイン') }}
+                                <!-- {{ __('Log in') }} なぜログインできる？ログイン機能はボタンについてる？-->
                             </x-button>
                         </div>
                     </form>
-                    <p class="text">アカウントをお持ちでない方はこちらから</p>
+                    <p class=" text">アカウントをお持ちでない方はこちらから</p>
                     <a href="/register" class="login_btn" style="color:blue;">会員登録</a>
                 </div>
             </div>
         </div>
+        <p class="service-title2">Atte,inc.</p>
     </body>
 
     </html>
