@@ -220,7 +220,7 @@ class AdvanceController extends Controller
 
         $punch_in = ['値1', '値2'];
 
-        $latest_punch_in_data = max('$punch_in');
+        $latest_punch_in_data = max($punch_in);
 
 
         // 勤怠開始のデータがあった場合、最初に表示される日付は最後に打刻した日が表示される
@@ -228,7 +228,7 @@ class AdvanceController extends Controller
         ->leftJoin('users', 'users.id', '=', 'times.user_id')
         ->select('times.*', 'users.name')
         ->whereNull('punch_in')
-        ->max('punch_in') 
+        ->max($punch_in) 
         ->get()
         ->first();
 
