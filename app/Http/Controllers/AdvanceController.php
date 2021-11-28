@@ -204,36 +204,25 @@ class AdvanceController extends Controller
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
-            ->get()
-            ->first();
+            ->get();
         
         if ($first_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
-        // $punch_in = DB::table('times')
-        //     ->leftJoin('users', 'users.id', '=', 'times.user_id')
-        //     ->select('times.*', 'users.name')
-        //     ->where('punch_in');
-        $score1 = '値1';
-        $score2 = '値2';
-
-        $punch_in = ['値1', '値2'];
-
-        $latest_punch_in_data = max($punch_in);
-
-
         // 勤怠開始のデータがあった場合、最初に表示される日付は最後に打刻した日が表示される
-        $first_data = DB::table('times')
+        $punch_in =DB::table('times')
         ->leftJoin('users', 'users.id', '=', 'times.user_id')
         ->select('times.*', 'users.name')
-        ->whereNull('punch_in')
-        ->max($punch_in) 
+        ->where('punch_in')
         ->get()
-        ->first();
 
-        if ($first_data === null) {
-        }
+        $latest_punch_in_data = max($punch_in);
+        dd($latest_punch_in_data);
+
+
+        
+       
 
         // 出勤データの取得処理　1日分にするため？
         $times_data = DB::table('times')
