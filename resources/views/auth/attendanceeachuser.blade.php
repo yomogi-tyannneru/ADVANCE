@@ -3,135 +3,140 @@
 <html lang="ja">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Atte</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Atte</title>
 </head>
 
 <style>
-img {
-  width: 100%;
-  height: auto;
-}
+  img {
+    width: 100%;
+    height: auto;
+  }
 
-a {
-  color: #000000;
-  font-weight: bold;
-  font-size: 100%;
-  text-decoration: none;
-}
+  a {
+    color: #000000;
+    font-weight: bold;
+    font-size: 100%;
+    text-decoration: none;
+  }
 
-li {
-  list-style: none;
-}
+  li {
+    list-style: none;
+  }
 
-body {
-  color: #000000;
-  line-height: 1.7;
-}
+  body {
+    color: #000000;
+    line-height: 1.7;
+  }
 
-.flex__item {
-  display: flex;
-  justify-content: space-between;
-}
-/*--------------------- header--------------------- */
+  .flex__item {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.header {
-  position: sticky;
-  top: 0px;
-  z-index: 1;
-  height: 70px;
-  background-color: #fff;
-  padding: 20px 0;
-}
+  /*--------------------- header--------------------- */
 
-.header-title {
-  font-size: 200%;
-  padding: 0px 35px;
-}
+  .header {
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    height: 70px;
+    background-color: #fff;
+    padding: 20px 0;
+  }
 
-.header__nav {
-  margin-right: 60px;
-}
+  .header-title {
+    font-size: 200%;
+    padding: 0px 35px;
+  }
 
-.header__nav-list li {
-  margin-right: 50px;
-  font-size: 120%;
-}
+  .header__nav {
+    margin-right: 60px;
+  }
 
-.header__nav-list li:last-child {
-  margin-right: 0;
-}
+  .header__nav-list li {
+    margin-right: 50px;
+    font-size: 120%;
+  }
 
-.header__nav-list-link {
-  height: 70px;
-  display: inline-block;
-}
+  .header__nav-list li:last-child {
+    margin-right: 0;
+  }
 
-.header__nav-list-link:hover {
-  filter: opacity(70%);
-  cursor: pointer;
-}
+  .header__nav-list-link {
+    height: 70px;
+    display: inline-block;
+  }
+
+  .header__nav-list-link:hover {
+    filter: opacity(70%);
+    cursor: pointer;
+  }
 
 
-/*--------------------- stamp--------------------- */
-.service {
-  padding: 20px 160px 100px;
+  /*--------------------- stamp--------------------- */
+  .service {
+    padding: 20px 160px 100px;
     background-color: #f1eeee;
-}
+  }
 
-.service-title {
-  font-size: 22px;
-  text-align: center;
-  margin-bottom: 30px;
-  font-weight: bolder;
-}
+  .service-title {
+    font-size: 22px;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bolder;
+  }
 
-.service_png-position {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 100%;
-}
+  .service_png-position {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
 
-.service_png-positiondiv {
-  width: 100%;
-}
+  .service_png-positiondiv {
+    width: 100%;
+  }
 
-.form{
-  margin: 20px auto;
-}
-.form-item {
-  padding: 5px 0;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
+  .form {
+    margin: 20px auto;
+  }
 
-.form-btn {
-  border-radius: 6px;
-  border: 0px solid #fff;
-  background-color: #fff;
-  height: 200px;
-  width: 100%;
-  display: block;
-  font-size: 22px;
-  margin: 0px 10px;
-  font-weight: bolder;
-}
-.form-btn:hover {
-  filter: opacity(70%);
-  cursor: pointer;
-}
-.service-title2 {
-  font-size: 16px;
-  text-align: center;
-  font-weight: bolder;
-}
-.form-item1 {
-    width:100%; 
-    margin: 0 auto; 
+  .form-item {
+    padding: 5px 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .form-btn {
+    border-radius: 6px;
+    border: 0px solid #fff;
+    background-color: #fff;
+    height: 200px;
+    width: 100%;
+    display: block;
+    font-size: 22px;
+    margin: 0px 10px;
+    font-weight: bolder;
+  }
+
+  .form-btn:hover {
+    filter: opacity(70%);
+    cursor: pointer;
+  }
+
+  .service-title2 {
+    font-size: 16px;
+    text-align: center;
+    font-weight: bolder;
+  }
+
+  .form-item1 {
+    width: 100%;
+    margin: 0 auto;
     padding: auto;
     font-size: 18px;
     border-bottom: 1px solid black;
@@ -139,13 +144,15 @@ body {
     border-collapse: collapse;
     text-align: center;
   }
-  th,td{
+
+  th,
+  td {
     width: 16.6%;
   }
+
   tr {
     border-bottom: 1px solid black;
   }
-
 </style>
 
 
@@ -167,7 +174,7 @@ body {
     </nav>
   </header>
   <div class="service">
-    <p class="service-title">日時ページネーション</p>
+    <p class="service-title">{{ $user->name }}さんの勤怠表</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="/" class="form" name="punch_in" method="POST">
@@ -186,14 +193,14 @@ body {
               </thead>
               <tbody>
                 @foreach ($times_data as $data)
-                  <tr>
-                    <td>{{ Auth::user()['name'] }}</td>
-                    <td>{{ $data['date'] }}</td>
-                    <td>{{ $data['punch_in'] }}</td>
-                    <td>{{ $data['punch_out'] ?? '--:--:--' }}</td>
-                    <td>{{ '計算部分' }}</td>
-                    <td>{{ $data['work_time'] ?? '--:--:--' }}</td>
-                  </tr>
+                <tr>
+                  <td>{{ Auth::user()['name'] }}</td>
+                  <td>{{ $data['date'] }}</td>
+                  <td>{{ $data['punch_in'] }}</td>
+                  <td>{{ $data['punch_out'] ?? '--:--:--' }}</td>
+                  <td>{{ '計算部分' }}</td>
+                  <td>{{ $data['work_time'] ?? '--:--:--' }}</td>
+                </tr>
                 @endforeach
               </tbody>
             </table>

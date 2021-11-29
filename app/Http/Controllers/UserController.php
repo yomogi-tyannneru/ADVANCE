@@ -20,6 +20,18 @@ class UserController extends Controller
 
   public function show(Request $request, $id)
   {
+    
+    // 勤怠開始のデータがない場合の表示は打刻データがありませんと表示
+    $first_data = DB::table('times')
+    ->leftJoin('users', 'users.id', '=', 'times.user_id')
+    ->select('times.*', 'users.name')
+    ->whereNOTNull('punch_in')
+    ->get();
+
+    if ($first_data === null) {
+      $request->session()->flash('error_message', '打刻データがありません');
+    }
+    
     // 出勤データの取得処理　1日分にするため？
     $times_data = DB::table('times')
       //timesテーブルのtimes、user_idとusersテーブルのusers.idをくっつける
@@ -70,9 +82,10 @@ class UserController extends Controller
         }
       }
     }
+    // なぜ反映されない
+    $user = Auth::user();
 
     return view('user.show', compact('times_data'));
-    // return view('auth.attendance')->with(['users' => $users]);
   }
 
   private function time_diff($time_from, $time_to)

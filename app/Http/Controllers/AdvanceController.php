@@ -211,14 +211,16 @@ class AdvanceController extends Controller
         }
 
         // 勤怠開始のデータがあった場合、最初に表示される日付は最後に打刻した日が表示される
+        //全ての勤怠開始データを取得
         $punch_in =DB::table('times')
         ->leftJoin('users', 'users.id', '=', 'times.user_id')
         ->select('times.*', 'users.name')
         ->where('punch_in')
-        ->get()
+        ->get();
 
+        // 全ての勤怠開始データの中の最新データ
         $latest_punch_in_data = max($punch_in);
-        dd($latest_punch_in_data);
+        // dd($latest_punch_in_data);
 
 
         
@@ -238,10 +240,10 @@ class AdvanceController extends Controller
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
             // ->get();
-            ->paginate(5);
+            ->paginate(2);
 
-        // dd($times_data);
-        //勤務時間の計算処理
+        
+        // 勤務時間の計算処理
         // $times_data = json_decode(json_encode($times_data), true);
         // $times_data = array_column($times_data, null, 'id');
         // foreach ($times_data as $data) {
@@ -250,7 +252,7 @@ class AdvanceController extends Controller
         //         $to   = strtotime($data['punch_out']);
         //         $times_data[$data['id']]['work_time'] = $this->time_diff($from, $to);
         //     }
-        //     //初期値0
+            //初期値0 どこが配列になっているのかわからない　type intなのか
         //     $times_data[$data['id']]['rest_time'] = '00:00:00';
         // }
 
@@ -282,6 +284,7 @@ class AdvanceController extends Controller
         return view('auth.attendance', compact('times_data'));
         // return view('auth.attendance')->with(['users' => $users]);
     }
+    
 
     private function time_diff($time_from, $time_to)
     {

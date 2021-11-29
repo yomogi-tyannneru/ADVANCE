@@ -197,7 +197,7 @@
     </nav>
   </header>
   <div class="service">
-    <p class="service-title">日時ページネーション</p>
+    <p class="service-title">さんの勤怠表</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="/" class="form" name="punch_in" method="POST">
