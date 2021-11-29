@@ -215,8 +215,10 @@ class AdvanceController extends Controller
         $punch_in =DB::table('times')
         ->leftJoin('users', 'users.id', '=', 'times.user_id')
         ->select('times.*', 'users.name')
-        ->where('punch_in')
-        ->get();
+        ->select('punch_in')
+        ->get()
+        ->all();
+        // dd($punch_in);
 
         // 全ての勤怠開始データの中の最新データ
         $latest_punch_in_data = max($punch_in);

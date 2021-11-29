@@ -187,7 +187,7 @@
     </nav>
   </header>
   <div class="service">
-    <p class="service-title"></p>
+    <p class="service-title">{{$latest_punch_in_data->date}}</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="/" class="form" name="punch_in" method="POST">
