@@ -220,6 +220,8 @@ class AdvanceController extends Controller
         ->all();
         // dd($punch_in);
 
+        
+
         // 全ての勤怠開始データの中の最新データ
         $latest_punch_in_data = max($punch_in);
         // dd($latest_punch_in_data);
@@ -283,8 +285,14 @@ class AdvanceController extends Controller
         //         }
         //     }
         // }
-        return view('auth.attendance', compact('times_data'));
-        // return view('auth.attendance')->with(['users' => $users]);
+        $param = [
+            'rests_data' => $rests_data,
+            'latest_punch_in_data' => $latest_punch_in_data,
+            'times_data' => $times_data
+        ];
+        // dd($param);
+
+        return view('auth.attendance', $param);
     }
     
 
