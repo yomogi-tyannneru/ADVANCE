@@ -228,6 +228,7 @@
               </tbody>
             </table>
           </div>
+          {{ $times_data->links() }}
         </form>
       </div>
     </div>

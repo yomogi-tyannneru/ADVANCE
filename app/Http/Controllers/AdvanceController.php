@@ -344,7 +344,7 @@ class AdvanceController extends Controller
     }
 
 
-    private function time_diff2($time_from, $time_to)
+    private function time_diff２($time_from, $time_to)
     {
         $time = $time_to - $time_from;
         return gmdate("H:i:s", $time);

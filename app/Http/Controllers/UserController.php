@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Carbon\Carbon;
 use App\Models\User;
 
+
 class UserController extends Controller
 {
   //打刻ページ
@@ -41,7 +42,9 @@ class UserController extends Controller
       //.は、〜の〜の中のという意味
       ->select('times.*', 'times.date', 'users.name')
       // ->groupBy('times.date')
-      ->get();
+      // ->get()
+      ->paginate(2)
+      ;
 
     //？
     $times_data = json_decode(json_encode($times_data), true);
