@@ -187,7 +187,7 @@
     </nav>
   </header>
   <div class="service">
-    <p class="service-title">{{$latest_punch_in_data->date}}</p>
+    <p class="service-title">{{$latest_punch_in_date->date}}</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="/" class="form" name="punch_in" method="POST">
@@ -197,7 +197,6 @@
               <thead>
                 <tr>
                   <th class="form-item3">名前</th>
-                  <th>日付</th>
                   <th>勤務開始</th>
                   <th>勤務終了</th>
                   <th>休憩時間</th>
@@ -210,7 +209,6 @@
                 @foreach ($times_data as $data)
                 <tr>
                   <td>{{ $data->name }}</td>
-                  <td>{{ $data->date }}</td>
                   <td>{{ $data->punch_in }}</td>
                   <td>{{ $data->punch_out ?? '--:--:--' }}</td>
                   <td>{{ $data->rest_time ?? '--:--:--' }}</td>

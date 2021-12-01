@@ -212,19 +212,14 @@ class AdvanceController extends Controller
 
         // 勤怠開始のデータがあった場合、最初に表示される日付は最後に打刻した日が表示される
         //全ての勤怠開始データを取得
-        $punch_in =DB::table('times')
+        $all_date =DB::table('times')
         ->leftJoin('users', 'users.id', '=', 'times.user_id')
         ->select('times.*', 'users.name')
-        ->select('punch_in')
+        ->select('date')
         ->get()
         ->all();
-        // dd($punch_in);
-
-        
-
         // 全ての勤怠開始データの中の最新データ
-        $latest_punch_in_data = max($punch_in);
-        // dd($latest_punch_in_data);
+        $latest_punch_in_date = max($all_date);
 
 
         
@@ -234,7 +229,7 @@ class AdvanceController extends Controller
         $times_data = DB::table('times')
             //timesテーブルのuser_idとusersテーブルのusers.idをくっつける
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
-            // ->whereDate('times.date', '2021-11-22') // 日付を指定する場合
+            ->whereDate('times.date', $latest_punch_in_date) // 日付を指定する場合2021-12-01
             //timesテーブルの全データとusersテーブルのnameを取得
             //.は、〜の〜の中のという意味
             ->select('times.*', 'users.name')
@@ -245,6 +240,7 @@ class AdvanceController extends Controller
             // ->groupBy('times.date')
             // ->get();
             ->paginate(2);
+            // dd($times_data);
 
         
         // 勤務時間の計算処理
@@ -287,7 +283,7 @@ class AdvanceController extends Controller
         // }
         $param = [
             'rests_data' => $rests_data,
-            'latest_punch_in_data' => $latest_punch_in_data,
+            'latest_punch_in_date' => $latest_punch_in_date,
             'times_data' => $times_data
         ];
         // dd($param);
