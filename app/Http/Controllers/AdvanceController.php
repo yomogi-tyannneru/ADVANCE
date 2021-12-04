@@ -293,7 +293,7 @@ class AdvanceController extends Controller
     }
 
     //日付別勤怠ページ次の日
-    public function attendance_nextdate(Request $request)
+    public function attendanceNextdate(Request $request)
     {
         // 勤怠開始のデータがない場合の表示は打刻データがありませんと表示
         $first_data = DB::table('times')

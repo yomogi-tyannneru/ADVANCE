@@ -230,7 +230,7 @@
   </header>
   <div class="service">
     <div class="service-title1">
-      <form class="form" name="contact" method="POST">
+      <form action={{ route('attendance_nextdate') }} class="form" name="attendance_nextdate" method="POST">
         <input type="submit" class="form-btn3" value="<">
       </form>
       <p class="service-title">{{$latest_punch_in_date->date}}</p>
