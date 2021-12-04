@@ -96,6 +96,7 @@
       text-align: center;
       margin-bottom: 30px;
       font-weight: bolder;
+      padding: 20px;
     }
 
     .service_png-position {
@@ -164,6 +165,47 @@
     tr {
       border-bottom: 1px solid black;
     }
+
+    .form-btn3 {
+      border: 1px solid blue;
+      background-color: #fff;
+      height: 30px;
+      width: 40px;
+      display: block;
+      font-size: 22px;
+      font-weight: bolder;
+      color: blue;
+      padding-bottom: 35px;
+      margin-left: 300px;
+    }
+
+    .form-btn3:hover {
+      filter: opacity(70%);
+      cursor: pointer;
+    }
+
+    .form-btn4 {
+      border: 1px solid blue;
+      background-color: #fff;
+      height: 30px;
+      width: 40px;
+      display: block;
+      font-size: 22px;
+      font-weight: bolder;
+      color: blue;
+      padding-bottom: 35px;
+      margin-right: 300px;
+    }
+
+    .form-btn4:hover {
+      filter: opacity(70%);
+      cursor: pointer;
+    }
+
+    .service-title1 {
+      display: flex;
+      justify-content: center;
+    }
   </style>
 
 
@@ -187,10 +229,18 @@
     </nav>
   </header>
   <div class="service">
-    <p class="service-title">{{$latest_punch_in_date->date}}</p>
+    <div class="service-title1">
+      <form class="form" name="contact" method="POST">
+        <input type="submit" class="form-btn3" value="<">
+      </form>
+      <p class="service-title">{{$latest_punch_in_date->date}}</p>
+      <form class="form" name="contact" method="POST">
+        <input type="submit" class="form-btn4" value=">">
+      </form>
+    </div>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
-        <form action="/" class="form" name="punch_in" method="POST">
+        <form action="/" class="form" method="POST">
           @csrf
           <div class="form-item">
             <table class="form-item1">

@@ -13,6 +13,9 @@ Route::post('/break_end', [AdvanceController::class, 'breakEnd'])->name('break_e
 
 //日付別勤怠ページ
 Route::get('/attendance', [AdvanceController::class, 'attendance'])->middleware('auth')->name('attendance');
+Route::post('/attendance_nextdate', [AdvanceController::class, 'attendance'])->name('attendance_nextdate');
+Route::get('/attendance', [AdvanceController::class, 'attendance'])->middleware('auth')->name('attendance');
+
 
 //ユーザー一覧ページ
 Route::get('/user', [UserController::class, 'index'])->middleware('auth')->name('user.index');
