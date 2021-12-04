@@ -229,7 +229,7 @@ class AdvanceController extends Controller
         $times_data = DB::table('times')
             //timesテーブルのuser_idとusersテーブルのusers.idをくっつける
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
-            ->whereDate('times.date', $latest_punch_in_date) // 日付を指定する場合2021-12-01
+            ->whereDate('times.date',$latest_punch_in_date->date) // 日付を指定する場合2021-12-01
             //timesテーブルの全データとusersテーブルのnameを取得
             //.は、〜の〜の中のという意味
             ->select('times.*', 'users.name')
@@ -238,9 +238,9 @@ class AdvanceController extends Controller
             // ->selectRaw("CONCAT(times.date, ' ', times.punch_in) as timespunch_in")
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
-            // ->get();
-            ->paginate(2);
-            // dd($times_data);
+            ->get();
+            // ->paginate(1);
+            dd($times_data);
 
         
         // 勤務時間の計算処理

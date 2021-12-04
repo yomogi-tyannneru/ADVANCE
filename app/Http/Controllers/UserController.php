@@ -45,12 +45,13 @@ class UserController extends Controller
       // ->get()
       ->paginate(2)
       ;
+    // dd($times_data);
 
     //？
     $times_data = json_decode(json_encode($times_data), true);
     $times_data = array_column($times_data, null, 'id');
     foreach ($times_data as $data) {
-      if ($data['punch_out']) {
+      if ($data[0]['punch_out'] ?? '') {
         $from = strtotime($data['punch_in']);
         $to   = strtotime($data['punch_out']);
         $times_data[$data['id']]['work_time'] = $this->time_diff($from, $to);
