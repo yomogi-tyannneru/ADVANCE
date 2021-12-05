@@ -230,12 +230,14 @@
   </header>
   <div class="service">
     <div class="service-title1">
-      <form action={{ route('attendance_nextdate') }} class="form" name="attendance_nextdate" method="POST">
+
+      <form action="{{ route('attendance_beforedate') }}" class="form" method="POST">
         @csrf
         <input type="submit" class="form-btn3" value="<">
+        <input type="hidden" value="{{ $today  }}" name="date">
       </form>
       <p class="service-title">{{ $today }}</p>
-      <form action="{{ route('attendance_nextdate') }}" class="form" name="contact" method="POST">
+      <form action="{{ route('attendance_nextdate') }}" class="form" method="POST">
         @csrf
         <input type="submit" class="form-btn4" value=">">
         <input type="hidden" value="{{ $today }}" name="date">
@@ -243,38 +245,36 @@
     </div>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
-        <form action="/" class="form" method="POST">
-          @csrf
-          <div class="form-item">
-            <table class="form-item1">
-              <thead>
-                <tr>
-                  <th class="form-item3">名前</th>
-                  <th>勤務開始</th>
-                  <th>勤務終了</th>
-                  <th>休憩時間</th>
-                  <th>勤務時間</th>
-                </tr>
-              </thead>
+        @csrf
+        <div class="form-item">
+          <table class="form-item1">
+            <thead>
+              <tr>
+                <th class="form-item3">名前</th>
+                <th>勤務開始</th>
+                <th>勤務終了</th>
+                <th>休憩時間</th>
+                <th>勤務時間</th>
+              </tr>
+            </thead>
 
-              <tbody>
-                @foreach ($times_data as $data)
-                <tr>
-                  <td>{{ $data->name }}</td>
-                  <td>{{ $data->punch_in }}</td>
-                  <td>{{ $data->punch_out ?? '--:--:--' }}</td>
-                  <td>{{ array_key_exists($data->id, $rest_data) ? $rest_data[$data->id] : '--:--:--' }}</td>
-                  <td>{{ $data->work_time ?? '--:--:--' }}</td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-          {{ $times_data->links() }}
-          @if (empty($times_data->items()))
-          <p class="service-title" style="color: red;">{{ '打刻データがありません' }}</p>
-          @endif
-        </form>
+            <tbody>
+              @foreach ($times_data as $data)
+              <tr>
+                <td>{{ $data->name }}</td>
+                <td>{{ $data->punch_in }}</td>
+                <td>{{ $data->punch_out ?? '--:--:--' }}</td>
+                <td>{{ array_key_exists($data->id, $rest_data) ? $rest_data[$data->id] : '--:--:--' }}</td>
+                <td>{{ $data->work_time ?? '--:--:--' }}</td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+        {{ $times_data->links() }}
+        @if (empty($times_data->items()))
+        <p class="service-title" style="color: red;">{{ '打刻データがありません' }}</p>
+        @endif
       </div>
     </div>
   </div>
