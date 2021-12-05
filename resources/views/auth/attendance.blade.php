@@ -231,11 +231,14 @@
   <div class="service">
     <div class="service-title1">
       <form action={{ route('attendance_nextdate') }} class="form" name="attendance_nextdate" method="POST">
+        @csrf
         <input type="submit" class="form-btn3" value="<">
       </form>
-      <p class="service-title">{{$latest_punch_in_date->date}}</p>
-      <form class="form" name="contact" method="POST">
+      <p class="service-title">{{ $today }}</p>
+      <form action="{{ route('attendance_nextdate') }}" class="form" name="contact" method="POST">
+        @csrf
         <input type="submit" class="form-btn4" value=">">
+        <input type="hidden" value="{{ $today }}" name="date">
       </form>
     </div>
     <div class="service_png-position">
@@ -255,23 +258,21 @@
               </thead>
 
               <tbody>
-
                 @foreach ($times_data as $data)
                 <tr>
                   <td>{{ $data->name }}</td>
                   <td>{{ $data->punch_in }}</td>
                   <td>{{ $data->punch_out ?? '--:--:--' }}</td>
-                  <td>{{ $data->rest_time ?? '--:--:--' }}</td>
+                  <td>{{ array_key_exists($data->id, $rest_data) ? $rest_data[$data->id] : '--:--:--' }}</td>
                   <td>{{ $data->work_time ?? '--:--:--' }}</td>
                 </tr>
                 @endforeach
-
               </tbody>
             </table>
           </div>
           {{ $times_data->links() }}
-          @if (session('error_message'))
-          <p class="service-title" style="color: red;">{{ session('error_message') }}</p>
+          @if (empty($times_data->items()))
+          <p class="service-title" style="color: red;">{{ '打刻データがありません' }}</p>
           @endif
         </form>
       </div>
