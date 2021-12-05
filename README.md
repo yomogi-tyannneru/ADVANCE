@@ -1,3 +1,42 @@
+# Product overview
+
+## Atte
+Time and attendance management system of a company
+
+## Production background and purpose
+For personnel evaluation
+
+## Production goals
+Achieved 100 users
+
+## Server
+Heroku
+
+## language
+PHP
+
+## Framework
+Laravel
+
+# How to build the environment
+
+## Test
+Create tests using PHPUnit
+
+## Docker
+Build an environment using Docker
+
+## AWS
+Build an environment with storage as S3, backend as EC2, and database as RDS
+
+## Isolation of the environment
+Separate the development environment from the production environment
+
+## CI / CD
+Automate deployment and testing with Circle CI
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
