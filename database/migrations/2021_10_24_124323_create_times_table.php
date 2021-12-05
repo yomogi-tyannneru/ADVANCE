@@ -19,6 +19,7 @@ class CreateTimesTable extends Migration
             $table->date('date');
             $table->time('punch_in')->nullable();
             $table->time('punch_out')->nullable();
+            $table->time('work_time')->nullable();
         });
     }
 

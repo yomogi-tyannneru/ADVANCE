@@ -241,18 +241,18 @@ class AdvanceController extends Controller
 
 
         // // 勤務時間の計算処理
-        // $times_data = json_decode(json_encode($times_data), true);
-        // $times_data = array_column($times_data, null, 'id');
-        // foreach ($times_data as $data) {
-        //     // もし休憩終了があるならば
-        //     if ($data['punch_out']) {
-        //         $from = strtotime($data['punch_in']);
-        //         $to   = strtotime($data['punch_out']);
-        //         $times_data[$data['id']]['work_time'] = $this->time_diff($from, $to);
-        //     }
-        //     // 初期値0 どこが配列になっているのかわからない　type intなのか
-        //     $times_data[$data['id']]['rest_time'] = '00:00:00';
-        // }
+        $times_data = json_decode(json_encode($times_data), true);
+        $times_data = array_column($times_data, null, 'id');
+        foreach ($times_data as $data) {
+            // もし休憩終了があるならば
+            if ($data['punch_out']) {
+                $from = strtotime($data['punch_in']);
+                $to   = strtotime($data['punch_out']);
+                $times_data[$data['id']]['work_time'] = $this->time_diff($from, $to);
+            }
+            // 初期値0 どこが配列になっているのかわからない　type intなのか
+            $times_data[$data['id']]['rest_time'] = '00:00:00';
+        }
 
         // // 休憩開始データの取得処理
         $rests_data = DB::table('rests')
