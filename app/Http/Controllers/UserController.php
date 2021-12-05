@@ -45,7 +45,7 @@ class UserController extends Controller
       // ->get()
       ->paginate(2)
       ;
-    // dd($times_data);
+    // dd($times_data);v
 
     //？
     $times_data = json_decode(json_encode($times_data), true);
