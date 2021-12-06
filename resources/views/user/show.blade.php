@@ -217,12 +217,13 @@
               <tbody>
                 @foreach ($times_data as $data)
                 <tr>
-                  <td>{{ $data['name'] }}</td>
-                  <td>{{ $data['date'] }}</td>
-                  <td>{{ $data['punch_in'] }}</td>
-                  <td>{{ $data['punch_out'] ?? '--:--:--' }}</td>
-                  <td>{{ $data['rest_time'] }}</td>
-                  <td>{{ $data['work_time'] ?? '--:--:--' }}</td>
+                  <td>{{ $data->name }}</td>
+                  <td>{{ $data->punch_in }}</td>
+                  <!-- ?? = NULL合体演算子 -->
+                  <td>{{ $data->punch_out ?? '--:--:--' }}</td>
+                  <!-- 「条件式 ? TRUEのときの処理 : FALSEのときの処理」= 三項演算子 -->
+                  <td>{{ array_key_exists($data->id, $rest_data) ? $rest_data[$data->id] : '--:--:--' }}</td>
+                  <td>{{ $data->work_time ?? '--:--:--' }}</td>
                 </tr>
                 @endforeach
               </tbody>
