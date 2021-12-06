@@ -7,7 +7,8 @@ Time and attendance management system of a company
 For personnel evaluation
 
 ## Production goals
-Achieved 100 users
+From a mature evaluation, make an evaluation evaluation.
+Increased efficiency.
 
 ## Server
 Heroku
@@ -19,6 +20,7 @@ PHP
 Laravel
 
 # How to build the environment
+composer create-project laravel/laravel ADVANCE --prefer-dist
 
 ## Test
 Create tests using PHPUnit
@@ -34,6 +36,9 @@ Separate the development environment from the production environment
 
 ## CI / CD
 Automate deployment and testing with Circle CI
+
+
+
 
 
 
