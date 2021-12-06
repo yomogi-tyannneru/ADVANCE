@@ -5,7 +5,7 @@ use App\Http\Controllers\AdvanceController;
 use App\Http\Controllers\UserController;
 
 //打刻ページ
-Route::get('/', [AdvanceController::class, 'index'])->middleware('auth')->name('index');
+Route::get('/', [AdvanceController::class, 'index'])->middleware('auth')->middleware('verified')->name('index');
 Route::post('/punch_in', [AdvanceController::class, 'punchIn'])->name('punch_in');
 Route::post('/punch_out', [AdvanceController::class, 'punchOut'])->name('punch_out');
 Route::post('/break_start', [AdvanceController::class, 'breakStart'])->name('break_start');

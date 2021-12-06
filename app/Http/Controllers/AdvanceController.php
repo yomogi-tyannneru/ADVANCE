@@ -95,10 +95,18 @@ class AdvanceController extends Controller
             return redirect(route('index'));
         }
 
+        // 退勤時刻
+        $punch_out_time = Carbon::now();
+        // 勤務時間の計算
+        $work_time = $this->time_diff(strtotime($times_data->punch_in), strtotime($punch_out_time));
+
         // 退勤データの更新処理
         DB::table('times')
             ->where('id', $times_data->id)
-            ->update(['punch_out' => Carbon::now()]);
+            ->update([
+                'punch_out' => $punch_out_time, // 退勤時刻をセット
+                'work_time' => $work_time, // 勤務時間をセット
+            ]);
         // 処理成功のメッセージをセット
         // ...dash~で確認
         $request->session()->flash('success_message', '勤務終了しました');
@@ -230,30 +238,7 @@ class AdvanceController extends Controller
             //timesテーブルの全データとusersテーブルのnameを取得
             //.は、〜の〜の中のという意味
             ->select('times.*', 'users.name')
-            // ->selectRaw("TIMEDIFF('CONCAT(times.date, ' ', times.punch_out))','CONCAT(times.date, ' ', times.punch_in)') as date_diff")
-            // ->selectRaw("CONCAT(times.date, ' ', times.punch_out) as timespunch_out")
-            // ->selectRaw("CONCAT(times.date, ' ', times.punch_in) as timespunch_in")
-            // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
-            // ->groupBy('times.date')
-            // ->get();
-            ->paginate(1);
-        // dd($times_data);
-
-
-        // // 勤務時間の計算処理
-        $times_data = json_decode(json_encode($times_data), true);
-        $times_data = array_column($times_data, null, 'id');
-        foreach ($times_data as $data) {
-            // もし休憩終了があるならば
-            if ($data['punch_out']) {
-                $from = strtotime($data['punch_in']);
-                $to   = strtotime($data['punch_out']);
-                $times_data[$data['id']]['work_time'] = $this->time_diff($from, $to);
-            }
-            // 初期値0 どこが配列になっているのかわからない　type intなのか
-            $times_data[$data['id']]['rest_time'] = '00:00:00';
-        }
-        var_dump($times_data);
+            ->paginate(2);
 
         // // 休憩開始データの取得処理
         $rests_data = DB::table('rests')
@@ -334,7 +319,7 @@ class AdvanceController extends Controller
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
             // ->get();
-            ->paginate(1);
+            ->paginate(5);
         // dd($times_data->items());
 
 
@@ -352,35 +337,32 @@ class AdvanceController extends Controller
         //     $times_data[$data['id']]['rest_time'] = '00:00:00';
         // }
 
-        // // 休憩開始データの取得処理
-        // $rests_data = DB::table('rests')
-        //     ->join('times', 'rests.time_id', '=', 'times.id')
-        //     ->get();
-        // // $rests_data配列の要素$key => $restの繰り返し次の処理をする 全データの中の1つのtimesテーブルのid　つまり、一日分
-        // // $restとは？　一日に何度もある休憩を足すための繰り返し計算
-        // // foreach (配列 as 要素 => 値、中身)
-        // //配列として指定した時点でその要素は0から順に増えていくものと決まっている
-        // foreach ($rests_data as $key => $rest) {
-        // //     // もし休憩テーブルのtime_idがあるならば(勤務開始に値があるならば)
-        // //     // 休憩テーブルがあるということは、勤怠テーブルが有るということなのでifにしてあるが、ほぼtrueでfalseになることはない
-        //     if (array_key_exists($rest->time_id, $times_data)) {
-        // //         // もし休憩開始と休憩終了が空ではないならば
-        //         if (!empty($rest->break_start) && !empty($rest->break_end)) {
-        //             $from = strtotime($rest->break_start);
-        //             $to   = strtotime($rest->break_end);
-        // //             //timesテーブルの1つを選んだそれのrest_time　1日分の休憩時間　一時保存tmp　一周目は初期値
-        //             $rest_time_tmp = $times_data[$rest->time_id]['rest_time'];
-        // //             //計算した休憩時間
-        //             $rest_time = $this->time_diff($from, $to);
-        // //             //時間を秒に直して、一時保存したものと現在足したものの2つを足す
-        //             $times_data[$rest->time_id]['rest_time'] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
-        //         }
-        //     }
-        // }
+        // 休憩時間の計算処理
+        $rests_data = DB::table('rests')
+            ->join('times', 'rests.time_id', '=', 'times.id')
+            ->get();
+        $calclate_rest_data = [];
+        foreach ($rests_data as $key => $rest) {
+            if (!empty($rest->break_start) && !empty($rest->break_end)) {
+                $from = strtotime($rest->break_start);
+                $to   = strtotime($rest->break_end);
+                //timesテーブルの1つを選んだそれのrest_time　1日分の休憩時間　一時保存tmp　一周目は初期値
+                if (isset($calclate_rest_data[$rest->time_id])) {
+                    $rest_time_tmp = $calclate_rest_data[$rest->time_id];
+                } else {
+                    $rest_time_tmp = '';
+                }
+                //計算した休憩時間
+                $rest_time = $this->time_diff($from, $to);
+                //時間を秒に直して、一時保存したものと現在足したものの2つを足す
+                $calclate_rest_data[$rest->time_id] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
+            }
+        }
         $param = [
             // 'rests_data' => $rests_data,
             'today' => $tommorow,
             'times_data' => $times_data,
+            'rest_data' => $calclate_rest_data
         ];
         // dd($param);
 
@@ -392,10 +374,10 @@ class AdvanceController extends Controller
     {
         // 勤怠開始のデータがない場合の表示は打刻データがありませんと表示
         $first_data = DB::table('times')
-        ->leftJoin('users', 'users.id', '=', 'times.user_id')
-        ->select('times.*', 'users.name')
-        ->whereNOTNull('punch_in')
-        ->get();
+            ->leftJoin('users', 'users.id', '=', 'times.user_id')
+            ->select('times.*', 'users.name')
+            ->whereNOTNull('punch_in')
+            ->get();
 
         if ($first_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
@@ -403,11 +385,11 @@ class AdvanceController extends Controller
         // 勤怠開始のデータがあった場合、最初に表示される日付は最後に打刻した日が表示される
         //全ての勤怠開始データを取得
         $all_date = DB::table('times')
-        ->leftJoin('users', 'users.id', '=', 'times.user_id')
-        ->select('times.*', 'users.name')
-        ->select('date')
-        ->get()
-        ->all();
+            ->leftJoin('users', 'users.id', '=', 'times.user_id')
+            ->select('times.*', 'users.name')
+            ->select('date')
+            ->get()
+            ->all();
         // 全ての勤怠開始データの中の最新データ
         $latest_punch_in_date = max($all_date);
 
@@ -427,7 +409,7 @@ class AdvanceController extends Controller
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
             // ->get();
-            ->paginate(1);
+            ->paginate(5);
         // dd($times_data->items());
 
 
@@ -445,37 +427,33 @@ class AdvanceController extends Controller
         //     $times_data[$data['id']]['rest_time'] = '00:00:00';
         // }
 
-        // // 休憩開始データの取得処理
-        // $rests_data = DB::table('rests')
-        //     ->join('times', 'rests.time_id', '=', 'times.id')
-        //     ->get();
-        // // $rests_data配列の要素$key => $restの繰り返し次の処理をする 全データの中の1つのtimesテーブルのid　つまり、一日分
-        // // $restとは？　一日に何度もある休憩を足すための繰り返し計算
-        // // foreach (配列 as 要素 => 値、中身)
-        // //配列として指定した時点でその要素は0から順に増えていくものと決まっている
-        // foreach ($rests_data as $key => $rest) {
-        // //     // もし休憩テーブルのtime_idがあるならば(勤務開始に値があるならば)
-        // //     // 休憩テーブルがあるということは、勤怠テーブルが有るということなのでifにしてあるが、ほぼtrueでfalseになることはない
-        //     if (array_key_exists($rest->time_id, $times_data)) {
-        // //         // もし休憩開始と休憩終了が空ではないならば
-        //         if (!empty($rest->break_start) && !empty($rest->break_end)) {
-        //             $from = strtotime($rest->break_start);
-        //             $to   = strtotime($rest->break_end);
-        // //             //timesテーブルの1つを選んだそれのrest_time　1日分の休憩時間　一時保存tmp　一周目は初期値
-        //             $rest_time_tmp = $times_data[$rest->time_id]['rest_time'];
-        // //             //計算した休憩時間
-        //             $rest_time = $this->time_diff($from, $to);
-        // //             //時間を秒に直して、一時保存したものと現在足したものの2つを足す
-        //             $times_data[$rest->time_id]['rest_time'] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
-        //         }
-        //     }
-        // }
+        // 休憩時間の計算処理
+        $rests_data = DB::table('rests')
+            ->join('times', 'rests.time_id', '=', 'times.id')
+            ->get();
+        $calclate_rest_data = [];
+        foreach ($rests_data as $key => $rest) {
+            if (!empty($rest->break_start) && !empty($rest->break_end)) {
+                $from = strtotime($rest->break_start);
+                $to   = strtotime($rest->break_end);
+                //timesテーブルの1つを選んだそれのrest_time　1日分の休憩時間　一時保存tmp　一周目は初期値
+                if (isset($calclate_rest_data[$rest->time_id])) {
+                    $rest_time_tmp = $calclate_rest_data[$rest->time_id];
+                } else {
+                    $rest_time_tmp = '';
+                }
+                //計算した休憩時間
+                $rest_time = $this->time_diff($from, $to);
+                //時間を秒に直して、一時保存したものと現在足したものの2つを足す
+                $calclate_rest_data[$rest->time_id] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
+            }
+        }
         $param = [
-                // 'rests_data' => $rests_data,
-                'today' => $yesterday,
-                'times_data' => $times_data,
-            ];
-        // dd($param);
+            // 'rests_data' => $rests_data,
+            'today' => $yesterday,
+            'times_data' => $times_data,
+            'rest_data' => $calclate_rest_data
+        ];
 
         return view('auth.attendance', $param);
     }
