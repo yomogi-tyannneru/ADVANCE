@@ -21,7 +21,37 @@ class UserController extends Controller
 
   public function show(Request $request, $id)
   {
-    
+    $today = new Carbon('today');
+
+    $times_data2 = DB::table('times')
+    ->where('user_id', Auth::user()['id'])
+    ->whereNotNull('punch_in')
+    ->whereNull('punch_out')
+    ->whereDate('date', '<=', $today)
+      ->get()
+      ->first();
+
+    // 退勤時刻
+    $punch_out_time = Carbon::now();
+    // 勤務時間の計算
+    $work_time = $this->time_diff(strtotime($times_data2->punch_in), strtotime($punch_out_time));
+    // isset($work_time);
+    // var_dump(
+    //   $work_time
+    // );
+
+    // 退勤データの更新処理
+    DB::table('times')
+    ->where('id', $times_data2->id)
+      ->update([
+        'punch_out' => $punch_out_time, // 退勤時刻をセット
+        'work_time' => $work_time, // 勤務時間をセット
+      ]);
+      var_dump(
+      $work_time
+      );
+      // dd($work_time);
+
     // 勤怠開始のデータがない場合の表示は打刻データがありませんと表示
     $first_data = DB::table('times')
     ->leftJoin('users', 'users.id', '=', 'times.user_id')
@@ -84,7 +114,7 @@ class UserController extends Controller
         ];
         // dd($param);
 
-    return view('user.show', compact('times_data'));
+    return view('user.show', $param);
   }
 
   private function time_diff($time_from, $time_to)
