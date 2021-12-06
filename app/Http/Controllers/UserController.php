@@ -15,7 +15,7 @@ class UserController extends Controller
   //打刻ページ
   public function index(Request $request)
   {
-    $users = User::paginate(2);
+    $users = User::paginate(5);
     return view('user.index', compact('users'));
   }
 
