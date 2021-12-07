@@ -238,7 +238,7 @@ class AdvanceController extends Controller
             //timesテーブルの全データとusersテーブルのnameを取得
             //.は、〜の〜の中のという意味
             ->select('times.*', 'users.name')
-            ->paginate(2);
+            ->paginate(1);
 
         // // 休憩開始データの取得処理
         $rests_data = DB::table('rests')
@@ -319,7 +319,7 @@ class AdvanceController extends Controller
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
             // ->get();
-            ->paginate(5);
+            ->paginate(2);
         // dd($times_data->items());
 
 
@@ -409,7 +409,7 @@ class AdvanceController extends Controller
             // ->selectRaw("TIMEDIFF('2021-11-13 10:22:57','2021-11-13 09:26:17') as date_diff")
             // ->groupBy('times.date')
             // ->get();
-            ->paginate(5);
+            ->paginate(2);
         // dd($times_data->items());
 
 
