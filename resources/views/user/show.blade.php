@@ -197,7 +197,7 @@
     </nav>
   </header>
   <div class="service">
-    <p class="service-title">さんの勤怠表</p>
+    <p class="service-title">{{ $user->name }}さんの勤怠表</p>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
         <form action="/" class="form" name="punch_in" method="POST">
@@ -218,6 +218,7 @@
                 @foreach ($times_data as $data)
                 <tr>
                   <td>{{ $data->name }}</td>
+                  <td>{{ $data->date }}</td>
                   <td>{{ $data->punch_in }}</td>
                   <!-- ?? = NULL合体演算子 -->
                   <td>{{ $data->punch_out ?? '--:--:--' }}</td>

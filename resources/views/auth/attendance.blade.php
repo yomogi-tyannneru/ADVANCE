@@ -281,7 +281,7 @@
     </div>
   </div>
 
-  <!DOCTYPE html>
+  <!-- <!DOCTYPE html>
   <html lang="ja">
 
   <head>
@@ -320,5 +320,5 @@
         </a>
       </li>
     </ul>
-  </nav>
+  </nav> -->
 </x-app-layout>

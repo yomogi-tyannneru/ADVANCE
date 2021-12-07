@@ -13,6 +13,8 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
+    .pagination { justify-content: center; }
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -32,6 +34,7 @@
             {{ $slot }}
         </main>
     </div>
+
 </body>
 
 </html>

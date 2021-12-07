@@ -26,15 +26,17 @@ class UserController extends Controller
     $times_data2 = DB::table('times')
     ->where('user_id', Auth::user()['id'])
     ->whereNotNull('punch_in')
-    ->whereNull('punch_out')
+    // ->whereNotNull('punch_out')
     ->whereDate('date', '<=', $today)
       ->get()
       ->first();
+    // dd($times_data2);
 
     // 退勤時刻
     $punch_out_time = Carbon::now();
     // 勤務時間の計算
     $work_time = $this->time_diff(strtotime($times_data2->punch_in), strtotime($punch_out_time));
+    
     // isset($work_time);
     // var_dump(
     //   $work_time
@@ -44,12 +46,12 @@ class UserController extends Controller
     DB::table('times')
     ->where('id', $times_data2->id)
       ->update([
-        'punch_out' => $punch_out_time, // 退勤時刻をセット
+        // 'punch_out' => $punch_out_time, // 退勤時刻をセット
         'work_time' => $work_time, // 勤務時間をセット
       ]);
-      var_dump(
-      $work_time
-      );
+      // var_dump(
+      // $work_time
+      // );
       // dd($work_time);
 
     // 勤怠開始のデータがない場合の表示は打刻データがありませんと表示
@@ -106,11 +108,13 @@ class UserController extends Controller
                 $calclate_rest_data[$rest->time_id] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
             }
         }
+        $user = Auth::user();
         $param = [
             // 'rests_data' => $rests_data,
             // 'today' => $latest_punch_in_date->date,
             'times_data' => $times_data,
-            'rest_data' => $calclate_rest_data
+            'rest_data' => $calclate_rest_data,
+            'user' => $user
         ];
         // dd($param);
 
