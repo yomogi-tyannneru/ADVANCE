@@ -75,7 +75,7 @@ class UserController extends Controller
       ->select('times.*', 'times.date', 'users.name')
       // ->groupBy('times.date')
       // ->get()
-      ->paginate(2)
+      ->paginate(1)
       ;
     // dd($times_data);v
 

@@ -1,5 +1,9 @@
 <x-app-layout>
   <style>
+    .pagination {
+      justify-content: center;
+    }
+
     img {
       width: 100%;
       height: auto;

@@ -1,5 +1,9 @@
 <x-app-layout>
   <style>
+    .pagination {
+      justify-content: center;
+    }
+
     img {
       width: 100%;
       height: auto;
@@ -165,48 +169,48 @@
     }
   </style>
 
-    <header class="header flex__item">
-      <a class="header__nav-list-link header-title">Atte</a>
-      <nav class="header__nav">
-        <ul class="header__nav-list flex__item">
-          <li>
-            <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
-          </li>
-          <li>
-            <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
-          </li>
-          <li>
-            <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
-              @csrf
-              <button type="submit" class="header__nav-list-link1">ログアウト</button>
-            </form>
-          </li>
-        </ul>
-      </nav>
-    </header>
-    <div class="service">
-      <p class="service-title">ユーザー一覧</p>
-      <div class="service_png-position">
-        <div class="service_png-positiondiv">
-          <div class="form-item">
-            <table class="form-item1">
-              <thead>
-                <tr>
-                  <th class="form-item3">名前</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($users as $user)
-                <tr>
-                  <td><a href="{{ route('user.show', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
-                </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-          {{ $users->links() }}
+  <header class="header flex__item">
+    <a class="header__nav-list-link header-title">Atte</a>
+    <nav class="header__nav">
+      <ul class="header__nav-list flex__item">
+        <li>
+          <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
+        </li>
+        <li>
+          <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
+        </li>
+        <li>
+          <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
+            @csrf
+            <button type="submit" class="header__nav-list-link1">ログアウト</button>
+          </form>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div class="service">
+    <p class="service-title">ユーザー一覧</p>
+    <div class="service_png-position">
+      <div class="service_png-positiondiv">
+        <div class="form-item">
+          <table class="form-item1">
+            <thead>
+              <tr>
+                <th class="form-item3">名前</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach ($users as $user)
+              <tr>
+                <td><a href="{{ route('user.show', ['id' => $user->id]) }}">{{ $user->name }}</a></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
         </div>
+        {{ $users->links() }}
       </div>
     </div>
-    <p class="service-title2">Atte,inc.</p>
+  </div>
+  <p class="service-title2">Atte,inc.</p>
 </x-app-layout>
