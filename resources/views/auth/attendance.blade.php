@@ -235,13 +235,13 @@
   <div class="service">
     <div class="service-title1">
 
-      <form action="{{ route('attendance_beforedate') }}" class="form" method="POST">
+      <form action="{{ route('attendance_beforedate') }}" class="form" method="GET">
         @csrf
         <input type="submit" class="form-btn3" value="<">
         <input type="hidden" value="{{ $today  }}" name="date">
       </form>
       <p class="service-title">{{ $today }}</p>
-      <form action="{{ route('attendance_nextdate') }}" class="form" method="POST">
+      <form action="{{ route('attendance_nextdate') }}" class="form" method="GET">
         @csrf
         <input type="submit" class="form-btn4" value=">">
         <input type="hidden" value="{{ $today }}" name="date">
@@ -284,45 +284,4 @@
       </div>
     </div>
   </div>
-
-  <!-- <!DOCTYPE html>
-  <html lang="ja">
-
-  <head>
-    <title>Bootstrap Example</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  </head>
-
-  <body>
-
-    
-
-  </body>
-
-  </html>
-
-  <p class="service-title2">Atte,inc.</p>
-  <nav aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
-  </nav> -->
 </x-app-layout>
