@@ -129,57 +129,8 @@
         }
     </style>
 
-
-
     <!-- Validation Errors -->
     <x-auth-validation-errors class="mb-4" :errors="$errors" />
-
-    <!-- <form method="POST" action="">
-        @csrf
-
-        Name
-        <div>
-            <x-label for="name" :value="__('Name')" />
-
-            <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
-        </div>
-
-
-        Email Address
-        <div class="mt-4">
-            <x-label for="email" :value="__('Email')" />
-
-            <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-        </div>
-
-        Password
-        <div class="mt-4">
-            <x-label for="password" :value="__('Password')" />
-
-            <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-        </div>
-
-        Confirm Password
-        <div class="mt-4">
-            <x-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <p>アカウントをお持ちの方はこちら</p>
-
-            <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
-                {{ __('ログイン') }}
-            </a>
-
-            <x-button class="ml-4">
-                {{ __('会員登録') }}
-            </x-button>
-        </div>
-    </form> -->
-
-
     <body>
         <header class="header flex__item">
             <a class="header__nav-list-link header-title">Atte</a>
@@ -210,25 +161,20 @@
                         <div class="form-item">
                             <x-input id="password_confirmation" class="form-btn" type="password" name="password_confirmation" required placeholder="確認用パスワード" />
                         </div>
-
                         <div class="form-item">
                             <x-button class="form-btn1">
                                 {{ __('会員登録') }}
                             </x-button>
                             <p class="text">アカウントをお持ちの方はこちら</p>
                         </div>
-
                         <a class="login_btn" style="color:blue;" href="{{ route('login') }}">
                             {{ __('ログイン') }}
                         </a>
-
                     </form>
                 </div>
             </div>
         </div>
         <p class="service-title2">Atte,inc.</p>
     </body>
-
     </html>
-
 </x-guest-layout>
