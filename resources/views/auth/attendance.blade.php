@@ -249,7 +249,6 @@
     </div>
     <div class="service_png-position">
       <div class="service_png-positiondiv">
-        @csrf
         <div class="form-item">
           <table class="form-item1">
             <thead>
@@ -277,7 +276,7 @@
             </tbody>
           </table>
         </div>
-        {{ $times_data->links() }}
+        {{ $times_data->appends(request()->query())->links()}}
         @if (empty($times_data->items()))
         <p class="service-title" style="color: red;">{{ '打刻データがありません' }}</p>
         @endif
