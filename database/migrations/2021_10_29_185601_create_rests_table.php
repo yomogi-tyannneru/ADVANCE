@@ -17,7 +17,7 @@ class CreateRestsTable extends Migration
             $table->id()->unsigned();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('time_id')->constrained('times')->onDelete('cascade');
-            $table->date('date');
+            $table->date('date')->nullable();
             $table->time('break_start')->nullable();
             $table->time('break_end')->nullable();
         });
