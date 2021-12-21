@@ -20,6 +20,7 @@ class CreateRestsTable extends Migration
             $table->date('date')->nullable();
             $table->time('break_start')->nullable();
             $table->time('break_end')->nullable();
+            $table->timestamps();
         });
     }
 
