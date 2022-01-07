@@ -1,28 +1,66 @@
 <x-guest-layout>
     <x-auth-card>
-        <x-slot name="logo">
-            <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-            </a>
-        </x-slot>
+        <style>
+            .resend_email_message {
+                padding-top: 20px;
+            }
 
-        <div class="mb-4 text-sm text-gray-600">
-            {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
+            .button_layout {
+                display: flex;
+                justify-content: space-between;
+                padding-top: 20px;
+            }
+
+            .resend_email_button_layout {
+                padding-bottom: 10px;
+            }
+
+            .resend_email_button {
+                background: black;
+                border-radius: 6px;
+            }
+
+            .resend_email_button:hover {
+                filter: opacity(70%);
+                cursor: pointer;
+            }
+
+            .logout_button {
+                background-color: transparent;
+                border-top: none;
+                border-left: none;
+                border-right: none;
+                cursor: pointer;
+                outline: none;
+                padding: 0;
+                appearance: none;
+                border-color: #C0C0C0;
+                border-width: 1px;
+                padding-top: 10px;
+            }
+
+            .logout_button:hover {
+                filter: opacity(70%);
+                cursor: pointer;
+            }
+        </style>
+        <div class="">
+            {{ __('サインアップしていただきありがとうございます。始める前に、メールで送信したリンクをクリックして、メールアドレスを確認していただけますか？メールが届かない場合は、確認メールを再送をクリックしてください別のメールをお送りします。') }}
         </div>
 
         @if (session('status') == 'verification-link-sent')
-            <div class="mb-4 font-medium text-sm text-green-600">
-                {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-            </div>
+        <div class="resend_email_message">
+            {{ __('登録時に指定したメールアドレスに新しい確認リンクが送信されました。') }}
+        </div>
         @endif
 
-        <div class="mt-4 flex items-center justify-between">
+        <div class="button_layout">
             <form method="POST" action="{{ route('verification.send') }}">
                 @csrf
 
-                <div>
-                    <x-button>
-                        {{ __('Resend Verification Email') }}
+                <div class="resend_email_button_layout">
+                    <x-button class="resend_email_button ">
+                        {{ __('確認メールを再送') }}
                     </x-button>
                 </div>
             </form>
@@ -30,8 +68,8 @@
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
 
-                <button type="submit" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    {{ __('Log Out') }}
+                <button type="submit" class="logout_button">
+                    {{ __('ログアウト') }}
                 </button>
             </form>
         </div>
