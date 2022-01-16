@@ -180,6 +180,10 @@ class AdvanceController extends Controller
             ->get()
             ->all();
 
+        if ($all_date=== null) {
+            $request->session()->flash('error_message', '打刻データがありません');
+        }
+
         $latest_punch_in_date = max($all_date);
 
         $times_data = DB::table('times')

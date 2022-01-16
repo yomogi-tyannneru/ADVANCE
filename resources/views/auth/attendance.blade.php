@@ -224,6 +224,9 @@
           <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
         </li>
         <li>
+          <a href="/user" class="header__nav-list-link" style="color:black;">ユーザーページ</a>
+        </li>
+        <li>
           <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
             @csrf
             <button type="submit" class="header__nav-list-link1">ログアウト</button>

@@ -168,6 +168,9 @@
           <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
         </li>
         <li>
+          <a href="/user" class="header__nav-list-link" style="color:black;">ユーザーページ</a>
+        </li>
+        <li>
           <a href="news.html" class="header__nav-list-link" style="color:black;">ログアウト</a>
         </li>
       </ul>

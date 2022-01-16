@@ -27,7 +27,7 @@ class AuthenticationTest extends TestCase
     {
         // テストの際フェイクのデータを作成
         $user = User::factory()->create();
-        // デバッグ「de+bug」とは、コンピュータプログラムや電気機器中のバグ・欠陥を特定して取り除き、動作を仕様通りのものとするための作業である。
+        // デバッグ「de+bug」とは、コンピュータプログラムや電気機器中のバグ・欠陥を特定して取り除き、動作を仕様通りのものとするための作業である。Laravel　logに記述される
         Log::debug($user);
 
         // ミドルウェアなしでemailとpasswordでログインされたとき
