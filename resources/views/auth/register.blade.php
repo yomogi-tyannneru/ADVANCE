@@ -129,8 +129,6 @@
         }
     </style>
 
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
     <body>
         <header class="header flex__item">
             <a class="header__nav-list-link header-title">Atte</a>
@@ -161,6 +159,10 @@
                         <div class="form-item">
                             <x-input id="password_confirmation" class="form-btn" type="password" name="password_confirmation" required placeholder="確認用パスワード" />
                         </div>
+
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+                        
                         <div class="form-item">
                             <x-button class="form-btn1">
                                 {{ __('会員登録') }}
@@ -176,5 +178,6 @@
         </div>
         <p class="service-title2">Atte,inc.</p>
     </body>
+
     </html>
 </x-guest-layout>

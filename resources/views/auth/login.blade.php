@@ -132,8 +132,6 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <!-- Validation Errors -->
-    <x-auth-validation-errors class="mb-4" :errors="$errors" />
     <body>
         <header class="header flex__item">
             <a class="header__nav-list-link header-title">Atte</a>
@@ -154,6 +152,10 @@
 
                             <x-input id="password" class="form-btn" type="password" name="password" required autocomplete="current-password" placeholder="パスワード" />
                         </div>
+
+                        <!-- Validation Errors -->
+                        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
                         <div class="form-item">
                             <x-button value="ログイン" placeholder="ログイン" class="form-btn1">
                                 {{ __('ログイン') }}

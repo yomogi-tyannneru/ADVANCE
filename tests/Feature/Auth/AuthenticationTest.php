@@ -31,14 +31,15 @@ class AuthenticationTest extends TestCase
         Log::debug($user);
 
         // ミドルウェアなしでemailとpasswordでログインされたとき
-        $response= $this->withoutMiddleware()->post('/login', [
+        $response = $this->withoutMiddleware()->post('/login', [
             'email' => $user->email,
             'password' => 'password',
         ]);
 
         // $this->assertAuthenticated();
         // homeにリダイレクトする
-        $response->assertRedirect(RouteServiceProvider::HOME);
+        $this->assertAuthenticated($guard = null);
+        // $response->withSession(['foo' => 'bar'])->assertRedirect(RouteServiceProvider::HOME);
     }
 
     public function test_users_can_not_authenticate_with_invalid_password()

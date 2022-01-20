@@ -180,8 +180,19 @@ class AdvanceController extends Controller
             ->get()
             ->all();
 
-        if ($all_date=== null) {
+        
+
+        $today_kari
+            = [
+                'today' => '日付',
+                'times_data' => '日付',
+                'rest_data' => '日付'
+            ];
+
+        if (is_array($all_date) && empty($all_date)) {
             $request->session()->flash('error_message', '打刻データがありません');
+            echo $hito . “br”;
+            return view('auth.attendance', $today_kari);
         }
 
         $latest_punch_in_date = max($all_date);
