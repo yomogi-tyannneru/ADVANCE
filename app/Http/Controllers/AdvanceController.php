@@ -191,7 +191,6 @@ class AdvanceController extends Controller
 
         if (is_array($all_date) && empty($all_date)) {
             $request->session()->flash('error_message', '打刻データがありません');
-            echo $hito . “br”;
             return view('auth.attendance', $today_kari);
         }
 
