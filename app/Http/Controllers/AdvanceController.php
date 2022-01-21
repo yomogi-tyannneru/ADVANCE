@@ -185,12 +185,13 @@ class AdvanceController extends Controller
         $today_kari
             = [
                 'today' => '日付',
-                'times_data' => '日付',
-                'rest_data' => '日付'
+                'times_data' => [],
+                'rest_data' => []
             ];
 
         if (is_array($all_date) && empty($all_date)) {
             $request->session()->flash('error_message', '打刻データがありません');
+            
             return view('auth.attendance', $today_kari);
         }
 
