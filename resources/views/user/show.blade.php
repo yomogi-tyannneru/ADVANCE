@@ -222,7 +222,11 @@
                 </tbody>
               </table>
             </div>
-            {{ $times_data->links() }}
+            @if (empty($times_data2) || empty($times_data2->items()))
+            <p class="service-title" style="color: red;">{{ '打刻データがありません' }}</p>
+            @else
+            {{ $times_data->appends(request()->query())->links()}}
+            @endif
           </form>
         </div>
       </div>

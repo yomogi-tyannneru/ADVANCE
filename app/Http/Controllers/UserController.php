@@ -30,12 +30,18 @@ class UserController extends Controller
       ->get()
       ->first();
     // $times_data2->isEmpty();
-    
-    if (is_null($times_data2) || isset($times_data2['punch_in'])) {
-      $request->session()->flash('error_message', '打刻データがありません');
-      return view('user.show');
-    }
 
+    $user = Auth::user();
+    $kari = [
+      'times_data' => [],
+      'rest_data' =>[],
+      'user' => $user
+    ];
+    
+    if (is_null($times_data2) || isset($times_data2->punch_in)) {
+      $request->session()->flash('error_message', '打刻データがありません');
+      return view('user.show', $kari);
+    }
 
     $punch_out_time = Carbon::now();
     $work_time = $this->time_diff(strtotime($times_data2->punch_in), strtotime($punch_out_time));
