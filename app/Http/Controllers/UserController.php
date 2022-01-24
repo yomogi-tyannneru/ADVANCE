@@ -38,14 +38,14 @@ class UserController extends Controller
       'user' => $user
     ];
     
-    if (is_null($times_data2) || isset($times_data2->punch_in)) {
+    if (is_null($times_data2) || !isset($times_data2->punch_in)) {
       $request->session()->flash('error_message', '打刻データがありません');
       return view('user.show', $kari);
     }
 
     $punch_out_time = Carbon::now();
     $work_time = $this->time_diff(strtotime($times_data2->punch_in), strtotime($punch_out_time));
-    isset($times_data2['punch_in']);
+    isset($times_data2->punch_in);
   
 
     DB::table('times')
