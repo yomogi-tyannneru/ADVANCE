@@ -5,7 +5,7 @@ namespace Tests\App\Http\Controllers;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
-use App\User;
+use App\Models\User;
 
 class TestAdvanceController extends TestCase
 {
@@ -16,9 +16,13 @@ class TestAdvanceController extends TestCase
    */
   public function test_index()
   {
-    $response = $this->get('/');
+    $response = $this
+      ->actingAs(User::factory()->create()) // 追加
+      ->get(route('home'));
 
-    $response->assertStatus(200);
+
+    $response->assertStatus(200)
+      ->assertViewIs('home')
+      ->assertSee('You are logged in!');
   }
-
 }
