@@ -13,8 +13,10 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <link href="{{ asset('/css/app.css') }}" rel="stylesheet">
-    
+    <link rel="stylesheet" href="{{ asset('/css/index.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/attendance.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/show.css') }}">
+    <link rel="stylesheet" href="{{ asset('/css/userlist.css') }}">
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -34,7 +36,6 @@
             {{ $slot }}
         </main>
     </div>
-
 </body>
 
 </html>
