@@ -20,6 +20,16 @@ PHP
 Laravel
 
 # How to build the environment
+
+## MAMP/XAMPP
+環境構築（Mac）
+MAMPのインストール
+https://www.mamp.info/en/downloads/
+
+環境構築（Windows）
+XAMPPのインストール
+https://www.apachefriends.org/jp/index.html
+
 git clone https://github.com/yomogi-tyannneru/ADVANCE.git
 
 ## 　Email authentication
@@ -43,6 +53,10 @@ Change .env file to above
 
 ## Test
 Create tests using PHPUnit
+
+vendor/bin/phpunit is the test code.
+
+vendor/bin/phpunit tests/Feature/Auth/AuthenticationTest.phpis a certification-only test.
 
 ## Docker
 Build an environment using Docker
