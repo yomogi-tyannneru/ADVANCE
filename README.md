@@ -23,11 +23,15 @@ Laravel
 
 ## MAMP/XAMPP
 Environment construction (Mac)
+
 Install MAMP
+
 https://www.mamp.info/en/downloads/
 
 Environment construction (Windows)
+
 Install XAMPP
+
 https://www.apachefriends.org/jp/index.html
 
 ## clone
@@ -62,10 +66,20 @@ vendor/bin/phpunit tests/Feature/Auth/AuthenticationTest.phpis a certification-o
 ## Docker
 Build an environment using Docker
 
+Docker installation (Mac)
+
+https://www.docker.com/products/docker-desktop
+
+Docker installation (Windows)
+
+https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 
 
 ## Isolation of the environment
 Separate the development environment from the production environment
+
+## Heroku
+https://lit-peak-96335.herokuapp.com/
 
 
 
