@@ -22,14 +22,15 @@ Laravel
 # How to build the environment
 
 ## MAMP/XAMPP
-環境構築（Mac）
-MAMPのインストール
+Environment construction (Mac)
+Install MAMP
 https://www.mamp.info/en/downloads/
 
-環境構築（Windows）
-XAMPPのインストール
+Environment construction (Windows)
+Install XAMPP
 https://www.apachefriends.org/jp/index.html
 
+## clone
 git clone https://github.com/yomogi-tyannneru/ADVANCE.git
 
 ## 　Email authentication
