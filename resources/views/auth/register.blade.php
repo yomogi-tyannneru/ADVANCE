@@ -1,6 +1,4 @@
 <x-guest-layout>
-    
-
     <body>
         <header class="header flex__item">
             <a class="header__nav-list-link header-title">Atte</a>
@@ -34,7 +32,6 @@
 
                         <!-- Validation Errors -->
                         <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                        
                         <div class="form-item">
                             <x-button class="form-btn1">
                                 {{ __('会員登録') }}
@@ -50,6 +47,4 @@
         </div>
         <p class="service-title2">Atte,inc.</p>
     </body>
-
-    </html>
 </x-guest-layout>

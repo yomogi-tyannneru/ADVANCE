@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Models\User;
+use App\Models\Time;
 
-class AdvanceController extends Controller
+class AttendanceController extends Controller
 {
     //打刻ページ
     public function index(Request $request)
@@ -19,14 +21,13 @@ class AdvanceController extends Controller
     // 出勤処理
     public function punchIn(Request $request)
     {
+        $user = Auth::user();
         $today = new Carbon('today');
-        $data = DB::table('times')
-            ->where('user_id', Auth::user()['id'])
-            ->whereDate('date', $today)
-            ->get()
+        $punch_in_data = User::find($user->id)->times
+            ->where('date', $today)
             ->first();
 
-        if ($data) {
+        if ($punch_in_data) {
             $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
             return redirect(route('index'));
         }
@@ -45,39 +46,47 @@ class AdvanceController extends Controller
     // 退勤処理
     public function punchOut(Request $request)
     {
+        $user = Auth::user();
         $today = new Carbon('today');
-        $times_data = DB::table('times')
-            ->where('user_id', Auth::user()['id'])
+        $punch_in_data = User::find($user->id)->times
             ->whereNotNull('punch_in')
             ->whereNull('punch_out')
-            ->whereDate('date', '<=', $today)
-            ->get()
+            ->where('date', '<=', $today)
             ->first();
-        if ($times_data === null) {
+        if ($punch_in_data === null) {
             $request->session()->flash('error_message', '今日またはそれ以前の勤務開始打刻がないため勤務終了出来ません');
             return redirect(route('index'));
         }
 
-        $rests_data = DB::table('rests')
-            ->where('time_id', $times_data->id)
+        $break_start_data = Time::find($punch_in_data->id)->rests
             ->whereNotNull('break_start')
             ->whereNull('break_end')
-            ->get()
             ->first();
-        if ($rests_data) {
+        if ($break_start_data) {
             $request->session()->flash('error_message', '休憩終了打刻をしていないため勤務終了出来ません');
             return redirect(route('index'));
         }
 
         $punch_out_time = Carbon::now();
-        $work_time = $this->time_diff(strtotime($times_data->punch_in), strtotime($punch_out_time));
+        $work_time = $this->time_diff(strtotime($punch_in_data->punch_in), strtotime($punch_out_time));
 
         DB::table('times')
-            ->where('id', $times_data->id)
+            ->where('id', $punch_in_data->id)
             ->update([
                 'punch_out' => $punch_out_time,
                 'work_time' => $work_time,
             ]);
+
+        // Time::find($punch_in_data->id)->rests
+        //     ->update([
+        //         'punch_out' => $punch_out_time,
+        //         'work_time' => $work_time,
+        //     ]);
+
+        // Time::find($punch_in_data->id)->rests
+        //     ->update($punch_out_time,$work_time
+        //     );
+
         $request->session()->flash('success_message', '勤務終了しました');
         return redirect(route('index'));
     }
@@ -85,38 +94,35 @@ class AdvanceController extends Controller
     // 休憩開始処理
     public function breakStart(Request $request)
     {
+        $user = Auth::user();
         $today = new Carbon('today');
-        $data = DB::table('times')
-            ->where('user_id', Auth::user()['id'])
+        $punch_in_data = User::find($user->id)->times
             ->whereNotNull('punch_in')
             ->whereNull('punch_out')
-            ->whereDate('date', '<=', $today)
-            ->get()
+            ->where('date', '<=', $today)
             ->first();
 
-        if ($data === null) {
+        if ($punch_in_data === null) {
             $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩開始出来ません');
             return redirect(route('index'));
         }
 
-        $data4 = DB::table('rests')
-            ->where('time_id', $data->id)
+        $break_start_data = Time::find($punch_in_data->id)->rests
             ->whereNotNull('break_start')
             ->whereNull('break_end')
-            ->get()
             ->first();
 
-        if ($data4) {
+        if ($break_start_data) {
             $request->session()->flash('error_message', '既に休憩開始ボタンを押しているため休憩開始出来ません');
             return redirect(route('index'));
         }
 
         DB::table('rests')->insert(
             [
-                'user_id' => Auth::user()['id'], 
+                'user_id' => Auth::user()['id'],
                 'date' => Carbon::now(),
                 'break_start' => Carbon::now(),
-                'time_id' => $data->id
+                'time_id' => $punch_in_data->id
             ]
         );
 
@@ -127,34 +133,31 @@ class AdvanceController extends Controller
     // 休憩終了処理
     public function breakEnd(Request $request)
     {
+        $user = Auth::user();
         $today = new Carbon('today');
-        $times_data = DB::table('times')
-            ->where('user_id', Auth::user()['id'])
+        $punch_in_data = User::find($user->id)->times
             ->whereNotNull('punch_in')
             ->whereNull('punch_out')
-            ->whereDate('date', '<=', $today)
-            ->get()
+            ->where('date', '<=', $today)
             ->first();
 
-        if ($times_data === null) {
+        if ($punch_in_data === null) {
             $request->session()->flash('error_message', '出勤開始打刻をしていないため休憩終了出来ません');
             return redirect(route('index'));
         }
 
-        $rests_data = DB::table('rests')
-            ->where('time_id', $times_data->id)
+        $break_start_data = Time::find($punch_in_data->id)->rests
             ->whereNotNull('break_start')
             ->whereNull('break_end')
-            ->get()
             ->first();
 
-        if ($rests_data === null) {
+        if ($break_start_data === null) {
             $request->session()->flash('error_message', '休憩開始打刻をしていないため休憩終了出来ません');
             return redirect(route('index'));
         }
 
         DB::table('rests')
-            ->where('id', $rests_data->id)
+            ->where('id', $break_start_data->id)
             ->update(['break_end' => Carbon::now()]);
         $request->session()->flash('success_message', '休憩終了しました');
         return redirect(route('index'));
@@ -180,7 +183,7 @@ class AdvanceController extends Controller
             ->get()
             ->all();
 
-        
+
 
         $today_kari
             = [
@@ -191,31 +194,30 @@ class AdvanceController extends Controller
 
         if (is_array($all_date) && empty($all_date)) {
             $request->session()->flash('error_message', '打刻データがありません');
-            
+
             return view('auth.attendance', $today_kari);
         }
 
         $latest_punch_in_date = max($all_date);
 
-        $times_data = DB::table('times')
+        $punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $latest_punch_in_date->date)
             ->select('times.*', 'users.name')
             ->paginate(5);
 
-        $rests_data = DB::table('rests')
+        $break_start_data = DB::table('rests')
             ->join('times', 'rests.time_id', '=', 'times.id')
             ->get();
 
         $calclate_rest_data = [];
-        foreach ($rests_data as $key => $rest) {
+        foreach ($break_start_data as $key => $rest) {
             if (!empty($rest->break_start) && !empty($rest->break_end)) {
                 $from = strtotime($rest->break_start);
                 $to   = strtotime($rest->break_end);
                 if (isset($calclate_rest_data[$rest->time_id])) {
                     $rest_time_tmp = $calclate_rest_data[$rest->time_id];
-                }
-                else {
+                } else {
                     $rest_time_tmp = '';
                 }
                 $rest_time = $this->time_diff($from, $to);
@@ -224,7 +226,7 @@ class AdvanceController extends Controller
         }
         $param = [
             'today' => $latest_punch_in_date->date,
-            'times_data' => $times_data,
+            'times_data' => $punch_in_data,
             'rest_data' => $calclate_rest_data
         ];
 
@@ -246,17 +248,17 @@ class AdvanceController extends Controller
 
         $tommorow = date('Y-m-d', strtotime($request->date . ' +1 day'));
 
-        $times_data = DB::table('times')
+        $punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $tommorow)
             ->select('times.*', 'users.name')
             ->paginate(5);
 
-        $rests_data = DB::table('rests')
+        $break_start_data = DB::table('rests')
             ->join('times', 'rests.time_id', '=', 'times.id')
             ->get();
         $calclate_rest_data = [];
-        foreach ($rests_data as $key => $rest) {
+        foreach ($break_start_data as $key => $rest) {
             if (!empty($rest->break_start) && !empty($rest->break_end)) {
                 $from = strtotime($rest->break_start);
                 $to   = strtotime($rest->break_end);
@@ -271,7 +273,7 @@ class AdvanceController extends Controller
         }
         $param = [
             'today' => $tommorow,
-            'times_data' => $times_data,
+            'times_data' => $punch_in_data,
             'rest_data' => $calclate_rest_data
         ];
 
@@ -292,24 +294,23 @@ class AdvanceController extends Controller
         }
 
         $yesterday = date('Y-m-d', strtotime($request->date . ' -1 day'));
-        $times_data = DB::table('times')
+        $punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $yesterday)
             ->select('times.*', 'users.name')
             ->paginate(5);
 
-        $rests_data = DB::table('rests')
+        $break_start_data = DB::table('rests')
             ->join('times', 'rests.time_id', '=', 'times.id')
             ->get();
         $calclate_rest_data = [];
-        foreach ($rests_data as $key => $rest) {
+        foreach ($break_start_data as $key => $rest) {
             if (!empty($rest->break_start) && !empty($rest->break_end)) {
                 $from = strtotime($rest->break_start);
                 $to   = strtotime($rest->break_end);
                 if (isset($calclate_rest_data[$rest->time_id])) {
                     $rest_time_tmp = $calclate_rest_data[$rest->time_id];
-                }
-                else {
+                } else {
                     $rest_time_tmp = '';
                 }
                 $rest_time = $this->time_diff($from, $to);
@@ -318,7 +319,7 @@ class AdvanceController extends Controller
         }
         $param = [
             'today' => $yesterday,
-            'times_data' => $times_data,
+            'times_data' => $punch_in_data,
             'rest_data' => $calclate_rest_data
         ];
 

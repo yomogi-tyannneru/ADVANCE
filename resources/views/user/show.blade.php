@@ -6,13 +6,13 @@
       <nav class="header__nav">
         <ul class="header__nav-list flex__item">
           <li>
-            <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
+            <a href="/" class="header__nav-list-link">ホーム</a>
           </li>
           <li>
-            <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
+            <a href="/attendance" class="header__nav-list-link">日付一覧</a>
           </li>
           <li>
-            <a href="/user" class="header__nav-list-link" style="color:black;">ユーザーページ</a>
+            <a href="/user" class="header__nav-list-link">ユーザーページ</a>
           </li>
           <li>
             <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
@@ -23,7 +23,7 @@
         </ul>
       </nav>
     </header>
-    <div class="service">
+    <div class="service3">
       <p class="service-title">{{ $user->name }}さんの勤怠表</p>
       <div class="service_png-position2">
         <div class="service_png-position2div">

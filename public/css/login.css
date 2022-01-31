@@ -44,7 +44,7 @@ body {
 }
 
 /*--------------------- stamp--------------------- */
-.service {
+.service2 {
     padding: 20px 160px 300px;
     background-color: #f1eeee;
 }
@@ -75,7 +75,6 @@ body {
 .form-item {
     padding: 5px 0;
     width: 100%;
-
     padding: 15px 0px;
 }
 

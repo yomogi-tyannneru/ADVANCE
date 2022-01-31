@@ -7,7 +7,9 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
 use App\Models\User;
 
-class TestAdvanceController extends TestCase
+class
+
+TestAttendanceController extends TestCase
 {
   /**
    * 基本的なテスト例

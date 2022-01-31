@@ -1,18 +1,17 @@
 <x-app-layout>
-
   <body>
     <header class="header flex__item">
       <a class="header__nav-list-link header-title">Atte</a>
       <nav class="header__nav">
         <ul class="header__nav-list flex__item">
           <li>
-            <a href="/" class="header__nav-list-link" style="color:black;">ホーム</a>
+            <a href="/" class="header__nav-list-link">ホーム</a>
           </li>
           <li>
-            <a href="/attendance" class="header__nav-list-link" style="color:black;">日付一覧</a>
+            <a href="/attendance" class="header__nav-list-link">日付一覧</a>
           </li>
           <li>
-            <a href="/user" class="header__nav-list-link" style="color:black;">ユーザーページ</a>
+            <a href="/user" class="header__nav-list-link">ユーザーページ</a>
           </li>
           <li>
             <form method="POST" action="{{ route('logout') }}" name='$name' value='$name'>
@@ -23,7 +22,7 @@
         </ul>
       </nav>
     </header>
-    <div class="service">
+    <div class="service1">
       <p class="service-title">{{ $user->name }} さんお疲れさまです！</p>
       @if (session('error_message'))
       <p class="service-title" style="color: red;">{{ session('error_message') }}</p>
