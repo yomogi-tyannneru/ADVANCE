@@ -8,11 +8,12 @@ use App\Http\Controllers\TopController;
 
 //打刻ページ
 Route::get('/', [AttendanceController::class, 'index'])->middleware('auth')->middleware('verified')->name('index');
+Route::post('/punch_in', [TopController::class, 'show'])->name('top.show');
 Route::post('/punch_in', [AttendanceController::class, 'punchIn'])->name('punch_in');
+
 Route::post('/punch_out', [AttendanceController::class, 'punchOut'])->name('punch_out');
 Route::post('/break_start', [AttendanceController::class, 'breakStart'])->name('break_start');
 Route::post('/break_end', [AttendanceController::class, 'breakEnd'])->name('break_end');
-Route::get('/', [TopController::class, 'show'])->name('top.show');
 
 //日付別勤怠ページ
 Route::get('/attendance', [AttendanceController::class, 'attendance'])->middleware('auth')->name('attendance');

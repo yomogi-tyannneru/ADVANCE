@@ -12,15 +12,6 @@ use App\Common\sayHelloClass;
 
 class AttendanceController extends Controller
 {
-    public function show()
-    {
-        sayHelloClass::sayHello();
-
-        return view(
-            'topShow'
-        );
-    }
-
     //打刻ページ
     public function index(Request $request)
     {
@@ -36,11 +27,6 @@ class AttendanceController extends Controller
         $punch_in_data = User::find($user->id)->times
             ->where('date', $today)
             ->first();
-
-        if ($punch_in_data) {
-            $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
-            return redirect(route('index'));
-        }
 
         DB::table('times')->insert(
             [
