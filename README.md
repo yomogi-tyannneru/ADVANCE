@@ -1,82 +1,116 @@
-# Product overview
-
 ## Atte
-Time and attendance management system of a company
+会社の勤怠管理システム
+<img width="1413" alt="スクリーンショット 2022-02-01 23 38 13" src="https://user-images.githubusercontent.com/86700967/151989728-f64177b8-b086-4606-91cc-d66ea4cf4450.png">
+<img width="1408" alt="スクリーンショット 2022-02-01 23 38 22" src="https://user-images.githubusercontent.com/86700967/151989731-ecd48d4e-2d86-4ee2-b31d-53395ef8451d.png">
+<img width="1414" alt="スクリーンショット 2022-02-01 23 35 16" src="https://user-images.githubusercontent.com/86700967/151989702-afe8386e-70a4-4f16-a0e2-82810fca4950.png">
+<img width="1414" alt="スクリーンショット 2022-02-01 23 36 03" src="https://user-images.githubusercontent.com/86700967/151989718-cdd0e837-928f-4d4f-a832-53eb785011c9.png">
+<img width="1410" alt="スクリーンショット 2022-02-01 23 36 31" src="https://user-images.githubusercontent.com/86700967/151989721-53d8d3cf-29fa-4099-aef5-cddc265605a8.png">
+<img width="1410" alt="スクリーンショット 2022-02-01 23 37 01" src="https://user-images.githubusercontent.com/86700967/151989724-6ab215bd-aa96-4a1b-83fb-d36134292b44.png">
 
-## Production background and purpose
-For personnel evaluation
 
-## Production goals
-From a mature evaluation, make an evaluation evaluation.
-Increased efficiency.
+## 作成した目的
+スクールの課題として取り組みました。
 
-## Server
+## 機能一覧
+・
+・
+・
+・
+・
+・
+・
+フロントエンド
+
+HTML/CSS
+JavaScript
+Vue.js 2.6.12
+Vuetify 2.4.11
+VeeValidate 3.4.5
+バックエンド
+
+PHP 7.3
+Laravel 8.12
+league/flysystem-aws-s3-v3 1.0.29
+Mysql 8.0.23
+インフラ
+
+Netlify
+Heroku
+ClearDB MySQL(Heroku)
+AWS S3
+API
+
+Google Maps API
+PostcodeJP API
+
+## 機能一覧
+
+## サーバー
 Heroku
 
-## language
+## 言語
 PHP
 
-## Framework
-Laravel
+## フレームワーク
+Laravel breeze
 
-# How to build the environment
+# 環境を構築する方法
 
-## MAMP/XAMPP
-Environment construction (Mac)
+## MAMP / XAMPP
+環境構築（Mac）
 
-Install MAMP
+MAMPをインストールします
 
 https://www.mamp.info/en/downloads/
 
-Environment construction (Windows)
+環境構築（Windows）
 
-Install XAMPP
+XAMPPをインストールする
 
 https://www.apachefriends.org/jp/index.html
 
-## clone
+## クローン
 git clone https://github.com/yomogi-tyannneru/ADVANCE.git
 
-## 　Email authentication
+## メール認証
 
 ```php
 MAIL_DRIVER = smtp
-MAIL_HOST=smtp.gmail.com
+MAIL_HOST = smtp.gmail.com
 MAIL_PORT = 587
-MAIL_USERNAME = own gmail
-MAIL_PASSWORD = own app password
+MAIL_USERNAME =自分のGmail
+MAIL_PASSWORD =自分のアプリのパスワード
 MAIL_ENCRYPTION = tls
-MAIL_FROM_ADDRESS = own gmail
-MAIL_FROM_NAME = any app name
+MAIL_FROM_ADDRESS =自分のGmail
+MAIL_FROM_NAME =任意のアプリ名
 ```
 
-Change .env file to above
+.envファイルを上記に変更します
 
-○ Reference site
+○参考サイト
 
-[https://zenn.dev/kazushino/articles/67da2015865ae117444c](https://zenn.dev/kazushino/articles/67da2015865ae117444c)
+[https://zenn.dev/kazushino/articles/67da2015865ae117444c]（https://zenn.dev/kazushino/articles/67da2015865ae117444c）
 
-## Test
-Create tests using PHPUnit
+## テスト
+PHPUnitを使用してテストを作成する
 
-vendor/bin/phpunit is the test code.
+vendor / bin / phpunitはテストコードです。
 
-vendor/bin/phpunit tests/Feature/Auth/AuthenticationTest.phpis a certification-only test.
+vendor / bin / phpunit tests / Feature / Auth / AuthenticationTest.phpは、認定のみのテストです。
 
 ## Docker
-Build an environment using Docker
+Dockerを使用して環境を構築する
 
-Docker installation (Mac)
+Dockerのインストール（Mac）
 
 https://www.docker.com/products/docker-desktop
 
-Docker installation (Windows)
+Dockerのインストール（Windows）
 
 https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 
-
-## Isolation of the environment
-Separate the development environment from the production environment
+## 環境の切り分け
+開発環境と本番環境の切り分けを行います。
 
 ## Heroku
 https://lit-peak-96335.herokuapp.com/
