@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Time;
+use App\Common\sayHelloClass;
 
 class AttendanceController extends Controller
 {
+    public function show()
+    {
+        sayHelloClass::sayHello();
+
+        return view(
+            'topShow'
+        );
+    }
+
     //打刻ページ
     public function index(Request $request)
     {
@@ -166,13 +176,21 @@ class AttendanceController extends Controller
     //日付別勤怠ページ
     public function attendance(Request $request)
     {
-        $first_data = DB::table('times')
+        $nothing_break_start_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
+        // $user = Auth::user();
+        // $nothing_break_start_data =User::find($user->id)->times
+        //     ->select('times.*', 'users.name')
+        //     ->whereNOTNull('punch_in')
+        //     ->get();
 
-        if ($first_data === null) {
+
+
+
+        if ($nothing_break_start_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
@@ -236,13 +254,13 @@ class AttendanceController extends Controller
     //日付別勤怠ページ次の日
     public function attendanceNextdate(Request $request)
     {
-        $first_data = DB::table('times')
+        $nothing_break_start_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
 
-        if ($first_data === null) {
+        if ($nothing_break_start_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
@@ -283,13 +301,13 @@ class AttendanceController extends Controller
     //日付別勤怠ページ前の日
     public function attendanceBeforedate(Request $request)
     {
-        $first_data = DB::table('times')
+        $nothing_break_start_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
 
-        if ($first_data === null) {
+        if ($nothing_break_start_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 

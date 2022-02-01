@@ -44,6 +44,7 @@ body {
 .service {
     padding: 20px 160px 130px;
     background-color: #f1eeee;
+    height: calc(100vh - 70px - 70px);
 }
 
 .service-title {

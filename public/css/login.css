@@ -47,6 +47,7 @@ body {
 .service2 {
     padding: 20px 160px 300px;
     background-color: #f1eeee;
+    height: calc(100vh - 70px - 70px);
 }
 
 .service-title {
@@ -126,4 +127,8 @@ body {
     text-align: center;
     font-weight: bolder;
     padding: 10px;
+    height: 40px;
 }
+
+
+
