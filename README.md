@@ -7,52 +7,37 @@
 <img width="1410" alt="スクリーンショット 2022-02-01 23 36 31" src="https://user-images.githubusercontent.com/86700967/151989721-53d8d3cf-29fa-4099-aef5-cddc265605a8.png">
 <img width="1410" alt="スクリーンショット 2022-02-01 23 37 01" src="https://user-images.githubusercontent.com/86700967/151989724-6ab215bd-aa96-4a1b-83fb-d36134292b44.png">
 
-
 ## 作成した目的
-スクールの課題として取り組みました。
+スクールの課題として取り組みました。模擬案件を通じて、実際の開発に近いものを体験します。
 
 ## 機能一覧
-・
-・
-・
-・
-・
-・
-・
 フロントエンド
 
-HTML/CSS
-JavaScript
-Vue.js 2.6.12
-Vuetify 2.4.11
-VeeValidate 3.4.5
-バックエンド
+・HTML/CSS
 
-PHP 7.3
-Laravel 8.12
-league/flysystem-aws-s3-v3 1.0.29
-Mysql 8.0.23
+・JavaScript
+
+・バックエンド
+
+・PHP 7.4.23
+
+・Laravel Framework 8.68.1
+
+・Laravel breeze
+
+・Mysql 5.7.32    
+
 インフラ
 
-Netlify
-Heroku
-ClearDB MySQL(Heroku)
-AWS S3
-API
+・環境の切り分け
 
-Google Maps API
-PostcodeJP API
+・テスト
 
-## 機能一覧
+・Docker
 
-## サーバー
-Heroku
+・Heroku
 
-## 言語
-PHP
-
-## フレームワーク
-Laravel breeze
+・ClearDB MySQL(Heroku)
 
 # 環境を構築する方法
 
