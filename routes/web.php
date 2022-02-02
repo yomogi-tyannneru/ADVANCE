@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AttendanceController
 ;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\TopController;
+use App\Http\Controllers\ValidationController;
 
 //打刻ページ
 Route::get('/', [AttendanceController::class, 'index'])->middleware('auth')->middleware('verified')->name('index');
-Route::post('/punch_in', [TopController::class, 'show'])->name('top.show');
-Route::post('/punch_in', [AttendanceController::class, 'punchIn'])->name('punch_in');
 
+Route::post('/punch_in', [AttendanceController::class, 'punchIn'])->name('punch_in');
+// Route::post('/punch_in', [AttendanceController::class, 'validation'])->name('validation');
 Route::post('/punch_out', [AttendanceController::class, 'punchOut'])->name('punch_out');
 Route::post('/break_start', [AttendanceController::class, 'breakStart'])->name('break_start');
 Route::post('/break_end', [AttendanceController::class, 'breakEnd'])->name('break_end');

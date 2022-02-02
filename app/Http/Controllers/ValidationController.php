@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Time;
-use App\Common\sayHelloClass;
+use App\Common\validation;
 
-class TopController extends Controller
+class ValidationController extends Controller
 {
 
-    public function show(Request $request)
+    public function validation(Request $request)
     {
         $user = Auth::user();
         $today = new Carbon('today');

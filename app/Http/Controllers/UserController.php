@@ -21,45 +21,43 @@ class UserController extends Controller
   // ユーザーごとの勤怠表が見れるページ
   public function show(Request $request, $id)
   {
+    $user = Auth::user();
     $today = new Carbon('today');
 
-    $times_data2 = DB::table('times')
-      ->where('user_id', Auth::user()['id'])
+    $all_punch_in_data = User::find($user->id)->times
       ->whereNotNull('punch_in')
-      ->whereDate('date', '<=', $today)
-      ->get()
+      ->where('date', '<=', $today)
       ->first();
-    // $times_data2->isEmpty();
 
     $user = Auth::user();
     $kari = [
       'times_data' => [],
-      'rest_data' =>[],
+      'rest_data' => [],
       'user' => $user
     ];
-    
-    if (is_null($times_data2) || !isset($times_data2->punch_in)) {
+
+    if (is_null($all_punch_in_data) || !isset($all_punch_in_data->punch_in)) {
       $request->session()->flash('error_message', '打刻データがありません');
       return view('user.show', $kari);
     }
 
     $punch_out_time = Carbon::now();
-    $work_time = $this->time_diff(strtotime($times_data2->punch_in), strtotime($punch_out_time));
-    isset($times_data2->punch_in);
-  
+    $work_time = $this->time_diff(strtotime($all_punch_in_data->punch_in), strtotime($punch_out_time));
+    isset($all_punch_in_data->punch_in);
 
     DB::table('times')
-      ->where('id', $times_data2->id)
+      ->where('id', $all_punch_in_data->id)
       ->update([
         'work_time' => $work_time,
       ]);
-    $first_data = DB::table('times')
+
+    $punch_in_data = DB::table('times')
       ->leftJoin('users', 'users.id', '=', 'times.user_id')
       ->select('times.*', 'users.name')
       ->whereNOTNull('punch_in')
       ->get();
 
-    if ($first_data === null) {
+    if ($punch_in_data === null) {
       $request->session()->flash('error_message', '打刻データがありません');
     }
 

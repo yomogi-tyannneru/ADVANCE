@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use App\Models\User;
 use App\Models\Time;
-use App\Common\sayHelloClass;
+use App\Common\validation;
 
 class AttendanceController extends Controller
 {
@@ -27,6 +27,11 @@ class AttendanceController extends Controller
         $punch_in_data = User::find($user->id)->times
             ->where('date', $today)
             ->first();
+
+        if ($punch_in_data) {
+            $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
+            return redirect(route('index'));
+        }
 
         DB::table('times')->insert(
             [
@@ -162,21 +167,18 @@ class AttendanceController extends Controller
     //日付別勤怠ページ
     public function attendance(Request $request)
     {
-        $nothing_break_start_data = DB::table('times')
+        $all_punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
         // $user = Auth::user();
-        // $nothing_break_start_data =User::find($user->id)->times
+        // $all_punch_in_data =User::find($user->id)->times
         //     ->select('times.*', 'users.name')
         //     ->whereNOTNull('punch_in')
         //     ->get();
 
-
-
-
-        if ($nothing_break_start_data === null) {
+        if ($all_punch_in_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
@@ -186,8 +188,6 @@ class AttendanceController extends Controller
             ->select('date')
             ->get()
             ->all();
-
-
 
         $today_kari
             = [
@@ -204,7 +204,7 @@ class AttendanceController extends Controller
 
         $latest_punch_in_date = max($all_date);
 
-        $punch_in_data = DB::table('times')
+        $latest_time_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $latest_punch_in_date->date)
             ->select('times.*', 'users.name')
@@ -230,7 +230,7 @@ class AttendanceController extends Controller
         }
         $param = [
             'today' => $latest_punch_in_date->date,
-            'times_data' => $punch_in_data,
+            'times_data' => $latest_time_data,
             'rest_data' => $calclate_rest_data
         ];
 
@@ -240,19 +240,19 @@ class AttendanceController extends Controller
     //日付別勤怠ページ次の日
     public function attendanceNextdate(Request $request)
     {
-        $nothing_break_start_data = DB::table('times')
+        $all_punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
 
-        if ($nothing_break_start_data === null) {
+        if ($all_punch_in_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
         $tommorow = date('Y-m-d', strtotime($request->date . ' +1 day'));
 
-        $punch_in_data = DB::table('times')
+        $latest_time_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $tommorow)
             ->select('times.*', 'users.name')
@@ -277,7 +277,7 @@ class AttendanceController extends Controller
         }
         $param = [
             'today' => $tommorow,
-            'times_data' => $punch_in_data,
+            'times_data' => $latest_time_data,
             'rest_data' => $calclate_rest_data
         ];
 
@@ -287,18 +287,18 @@ class AttendanceController extends Controller
     //日付別勤怠ページ前の日
     public function attendanceBeforedate(Request $request)
     {
-        $nothing_break_start_data = DB::table('times')
+        $all_punch_in_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
 
-        if ($nothing_break_start_data === null) {
+        if ($all_punch_in_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
         }
 
         $yesterday = date('Y-m-d', strtotime($request->date . ' -1 day'));
-        $punch_in_data = DB::table('times')
+        $latest_time_data = DB::table('times')
             ->leftJoin('users', 'users.id', '=', 'times.user_id')
             ->whereDate('times.date', $yesterday)
             ->select('times.*', 'users.name')
@@ -323,7 +323,7 @@ class AttendanceController extends Controller
         }
         $param = [
             'today' => $yesterday,
-            'times_data' => $punch_in_data,
+            'times_data' => $latest_time_data,
             'rest_data' => $calclate_rest_data
         ];
 
