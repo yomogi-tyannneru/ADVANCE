@@ -39,6 +39,17 @@
 
 ・ClearDB MySQL(Heroku)
 
+## 設計書
+
+<img width="963" alt="スクリーンショット 2022-02-02 19 06 44" src="https://user-images.githubusercontent.com/86700967/152133566-82573a9a-a01e-4a0b-8b76-58abd4f30551.png">
+<img width="580" alt="スクリーンショット 2022-02-02 19 06 55" src="https://user-images.githubusercontent.com/86700967/152133589-7c07d29c-ff0f-4967-ae37-92c20c48a0da.png">
+<img width="475" alt="スクリーンショット 2022-02-02 19 07 04" src="https://user-images.githubusercontent.com/86700967/152133590-30d544d0-ec41-457a-b384-f4c1eb4fe55f.png">
+<img width="634" alt="スクリーンショット 2022-02-02 19 11 58" src="https://user-images.githubusercontent.com/86700967/152134598-e4022463-0dfb-4fde-946a-f9457e190db2.png">
+
+## ER図
+
+<img width="905" alt="スクリーンショット 2022-02-02 19 02 20" src="https://user-images.githubusercontent.com/86700967/152132768-6be22537-0f8b-43fe-82a8-1db0fc4c5461.png">
+
 # 環境を構築する方法
 
 ## MAMP / XAMPP
@@ -99,11 +110,3 @@ https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 
 ## Heroku
 https://lit-peak-96335.herokuapp.com/
-
-
-
-
-
-
-
-
