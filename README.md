@@ -110,3 +110,12 @@ https://hub.docker.com/editions/community/docker-ce-desktop-windows/
 
 ## Heroku
 https://lit-peak-96335.herokuapp.com/
+
+ログイン情報
+
+アカウント名:a
+
+email:haruto.matsuda@gmail.com
+
+パスワード：aaaaaaaa
+
