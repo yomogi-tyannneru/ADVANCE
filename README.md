@@ -66,7 +66,7 @@ XAMPPをインストールする
 https://www.apachefriends.org/jp/index.html
 
 ## クローン
-git clone https://github.com/yomogi-tyannneru/ADVANCE.git
+git clone -b master https://github.com/yomogi-tyannneru/ADVANCE.git
 
 ## メール認証
 
