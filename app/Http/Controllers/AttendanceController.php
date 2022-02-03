@@ -22,22 +22,24 @@ class AttendanceController extends Controller
     // 出勤処理
     public function punchIn(Request $request)
     {
-        $user = Auth::user();
-        $today = new Carbon('today');
-        $punch_in_data = User::find($user->id)->times
-            ->where('date', $today)
-            ->first();
+        // $user = Auth::user();
+        // $today = new Carbon('today');
+        // $punch_in_data = User::find($user->id)->times
+        //     ->where('date', $today)
+        //     ->first();
 
-        if ($punch_in_data) {
-            $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
-            return redirect(route('index'));
-        }
+        // if ($punch_in_data) {
+        //     $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
+        //     return redirect(route('index'));
+        // }
+        validation::validation();
 
         DB::table('times')->insert(
             [
                 'user_id' => Auth::user()['id'],
                 'date' => Carbon::now(),
                 'punch_in' => Carbon::now()
+                
             ]
         );
         $request->session()->flash('success_message', '勤務開始しました');
