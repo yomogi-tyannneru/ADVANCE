@@ -3,8 +3,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top: 300px;
-
+        margin-top: 100px;
     }
 
     .card {
@@ -15,6 +14,7 @@
         transition: 0.3s;
         justify-content: center;
     }
+    
 </style>
 <div class="layout_card">
     <div class="card">

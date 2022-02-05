@@ -1,4 +1,7 @@
 <x-guest-layout>
+    <div class="mail_position">
+        <div class="mail"></div>
+    </div>
     <x-auth-card>
         <style>
             .resend_email_message {

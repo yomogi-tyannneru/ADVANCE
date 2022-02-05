@@ -1,0 +1,31 @@
+.mail {
+	font-size: 100px;
+	position: relative;
+	width: 0;
+	height: 0;
+	border-right: 0.8em solid transparent;
+	border-left: 0.8em solid transparent;
+	border-top: 0.6em solid #dddbdb;
+	border-radius: 0.1em;
+}
+/* 下 */
+.mail::before {
+	position: absolute;
+	content: "";
+	top: -0.5em;
+	left: -0.8em;
+	width: 0;
+	height: 0;
+	border-top: 0.6em solid transparent;
+	border-bottom: 0.5em solid #dddbdb;
+	border-left: 0.8em solid #dddbdb;
+	border-right: 0.8em solid #dddbdb;
+	border-radius: 0 0 0.1em 0.1em;
+}
+.mail_position {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 200px;
+
+}
