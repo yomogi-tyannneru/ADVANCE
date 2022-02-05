@@ -32,7 +32,15 @@ class AttendanceController extends Controller
         //     $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
         //     return redirect(route('index'));
         // }
-        validation::validation();
+
+
+        $param = [
+            'today' => $today,
+            'user' => $user,
+            'punch_in_data' => $punch_in_data,
+            'request' => $request
+        ];
+        validation::validation($param);
 
         DB::table('times')->insert(
             [

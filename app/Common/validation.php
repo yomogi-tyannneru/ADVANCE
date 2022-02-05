@@ -23,5 +23,11 @@ class validation
       $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
       return redirect(route('index'));
     }
+    $param = [
+      'today' => $today,
+      'user' => $user,
+      'punch_in_data' => $punch_in_data,
+      'request' => $request
+    ];
   }
 }
