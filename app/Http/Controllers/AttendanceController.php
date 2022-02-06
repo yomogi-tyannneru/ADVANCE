@@ -54,7 +54,7 @@ class AttendanceController extends Controller
         return redirect(route('index'));
     }
 
-    // 退勤処理
+    // 退勤処理b
     public function punchOut(Request $request)
     {
         $user = Auth::user();
