@@ -1,4 +1,5 @@
 <x-app-layout>
+
   <body>
     <header class="header flex__item">
       <a class="header__nav-list-link header-title">Atte</a>

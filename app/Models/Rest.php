@@ -13,5 +13,4 @@ class Rest extends Model
   {
     return $this->hasMany(Time::class);
   }
-
 }

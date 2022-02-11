@@ -22,39 +22,22 @@ class AttendanceController extends Controller
     // 出勤処理
     public function punchIn(Request $request)
     {
-        // $user = Auth::user();
-        // $today = new Carbon('today');
-        // $punch_in_data = User::find($user->id)->times
-        //     ->where('date', $today)
-        //     ->first();
-
-        // if ($punch_in_data) {
-        //     $request->session()->flash('error_message', '既に勤務を開始しているため勤務開始出来ません');
-        //     return redirect(route('index'));
-        // }
-
-
-        $param = [
-            'today' => $today,
-            'user' => $user,
-            'punch_in_data' => $punch_in_data,
-            'request' => $request
-        ];
-        validation::validation($param);
-
+        $hasError = validation::punchInvalidation($request);
+        if ($hasError) {
+            return redirect(route('index'));
+        }
         DB::table('times')->insert(
             [
                 'user_id' => Auth::user()['id'],
                 'date' => Carbon::now(),
                 'punch_in' => Carbon::now()
-                
             ]
         );
         $request->session()->flash('success_message', '勤務開始しました');
         return redirect(route('index'));
     }
 
-    // 退勤処理b
+    // 退勤処理
     public function punchOut(Request $request)
     {
         $user = Auth::user();
@@ -64,17 +47,21 @@ class AttendanceController extends Controller
             ->whereNull('punch_out')
             ->where('date', '<=', $today)
             ->first();
-        if ($punch_in_data === null) {
-            $request->session()->flash('error_message', '今日またはそれ以前の勤務開始打刻がないため勤務終了出来ません');
-            return redirect(route('index'));
-        }
+        // if ($punch_in_data === null) {
+        //     $request->session()->flash('error_message', '今日またはそれ以前の勤務開始打刻がないため勤務終了出来ません');
+        //     return redirect(route('index'));
+        // }
 
-        $break_start_data = Time::find($punch_in_data->id)->rests
-            ->whereNotNull('break_start')
-            ->whereNull('break_end')
-            ->first();
-        if ($break_start_data) {
-            $request->session()->flash('error_message', '休憩終了打刻をしていないため勤務終了出来ません');
+        // $break_start_data = Time::find($punch_in_data->id)->rests
+        //     ->whereNotNull('break_start')
+        //     ->whereNull('break_end')
+        //     ->first();
+        // if ($break_start_data) {
+        //     $request->session()->flash('error_message', '休憩終了打刻をしていないため勤務終了出来ません');
+        //     return redirect(route('index'));
+        // }
+        $hasError = validation::punchOutvalidation($request);
+        if ($hasError) {
             return redirect(route('index'));
         }
 
@@ -87,17 +74,6 @@ class AttendanceController extends Controller
                 'punch_out' => $punch_out_time,
                 'work_time' => $work_time,
             ]);
-
-        // Time::find($punch_in_data->id)->rests
-        //     ->update([
-        //         'punch_out' => $punch_out_time,
-        //         'work_time' => $work_time,
-        //     ]);
-
-        // Time::find($punch_in_data->id)->rests
-        //     ->update($punch_out_time,$work_time
-        //     );
-
         $request->session()->flash('success_message', '勤務終了しました');
         return redirect(route('index'));
     }
@@ -113,18 +89,23 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        if ($punch_in_data === null) {
-            $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩開始出来ません');
-            return redirect(route('index'));
-        }
+        // if ($punch_in_data === null) {
+        //     $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩開始出来ません');
+        //     return redirect(route('index'));
+        // }
 
-        $break_start_data = Time::find($punch_in_data->id)->rests
-            ->whereNotNull('break_start')
-            ->whereNull('break_end')
-            ->first();
+        // $break_start_data = Time::find($punch_in_data->id)->rests
+        //     ->whereNotNull('break_start')
+        //     ->whereNull('break_end')
+        //     ->first();
 
-        if ($break_start_data) {
-            $request->session()->flash('error_message', '既に休憩開始ボタンを押しているため休憩開始出来ません');
+        // if ($break_start_data) {
+        //     $request->session()->flash('error_message', '既に休憩開始ボタンを押しているため休憩開始出来ません');
+        //     return redirect(route('index'));
+        // }
+
+        $hasError = validation::breakStartvalidation($request);
+        if ($hasError) {
             return redirect(route('index'));
         }
 
@@ -152,18 +133,22 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        if ($punch_in_data === null) {
-            $request->session()->flash('error_message', '出勤開始打刻をしていないため休憩終了出来ません');
-            return redirect(route('index'));
-        }
+        // if ($punch_in_data === null) {
+        //     $request->session()->flash('error_message', '出勤開始打刻をしていないため休憩終了出来ません');
+        //     return redirect(route('index'));
+        // }
 
-        $break_start_data = Time::find($punch_in_data->id)->rests
+        $break_start_data = Time::find($punch_in_data->id ?? '匿名')-> rests ?? '匿名'
             ->whereNotNull('break_start')
             ->whereNull('break_end')
             ->first();
 
-        if ($break_start_data === null) {
-            $request->session()->flash('error_message', '休憩開始打刻をしていないため休憩終了出来ません');
+        // if ($break_start_data === null) {
+        //     $request->session()->flash('error_message', '休憩開始打刻をしていないため休憩終了出来ません');
+        //     return redirect(route('index'));
+        // }
+        $hasError = validation::breakEndvalidation($request);
+        if ($hasError) {
             return redirect(route('index'));
         }
 
@@ -182,11 +167,6 @@ class AttendanceController extends Controller
             ->select('times.*', 'users.name')
             ->whereNOTNull('punch_in')
             ->get();
-        // $user = Auth::user();
-        // $all_punch_in_data =User::find($user->id)->times
-        //     ->select('times.*', 'users.name')
-        //     ->whereNOTNull('punch_in')
-        //     ->get();
 
         if ($all_punch_in_data === null) {
             $request->session()->flash('error_message', '打刻データがありません');
@@ -369,3 +349,4 @@ class AttendanceController extends Controller
         return ($h * 60 * 60) + ($m * 60) + $s;
     }
 }
+
