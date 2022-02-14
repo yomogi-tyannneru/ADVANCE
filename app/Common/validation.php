@@ -43,8 +43,21 @@ class validation
       $isError = true;
     }
     return $isError;
+  }
+  public static function punchOutvalidation2(Request $request)
+  {
+    
 
-    $isError2 = false;
+    $user = Auth::user();
+    $today = new Carbon('today');
+    $punch_in_data = User::find($user->id)->times()
+      ->whereNotNull('punch_in')
+      ->whereNull('punch_out')
+      ->where('date', '<=', $today)
+      ->first();
+   
+
+    $isError = false;
 
     $break_start_data = Time::find($punch_in_data->id)->rests()
       ->whereNotNull('break_start')
@@ -52,11 +65,10 @@ class validation
       ->first();
     if ($break_start_data) {
       $request->session()->flash('error_message', '休憩終了打刻をしていないため勤務終了出来ません');
-      $isError2 = true;
+      $isError= true;
     }
-    return $isError2;
+    return $isError;
   }
-
   public static function breakStartvalidation(Request $request)
   {
     $isError = false;
@@ -68,13 +80,25 @@ class validation
       ->whereNull('punch_out')
       ->where('date', '<=', $today)
       ->first();
-
     if ($punch_in_data === null) {
       $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩開始出来ません');
       $isError = true;
     }
     return $isError;
+  }
 
+  public static function breakStartvalidation2(Request $request)
+  {
+    $isError = false;
+
+    $user = Auth::user();
+    $today = new Carbon('today');
+    $punch_in_data = User::find($user->id)->times()
+      ->whereNotNull('punch_in')
+      ->whereNull('punch_out')
+      ->where('date', '<=', $today)
+      ->first();
+      
     $break_start_data = Time::find($punch_in_data->id)->rests()
       ->whereNotNull('break_start')
       ->whereNull('break_end')
@@ -98,18 +122,29 @@ class validation
       ->whereNull('punch_out')
       ->where('date', '<=', $today)
       ->first();
-
     if ($punch_in_data === null) {
-      $request->session()->flash('error_message', '出勤開始打刻をしていないため休憩終了出来ません');
+      $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩終了出来ません');
       $isError = true;
     }
     return $isError;
+  }
+
+  public static function breakEndvalidation2(Request $request)
+  {
+    $isError = false;
+
+    $user = Auth::user();
+    $today = new Carbon('today');
+    $punch_in_data = User::find($user->id)->times()
+      ->whereNotNull('punch_in')
+      ->whereNull('punch_out')
+      ->where('date', '<=', $today)
+      ->first();
 
     $break_start_data = Time::find($punch_in_data->id)->rests()
       ->whereNotNull('break_start')
       ->whereNull('break_end')
       ->first();
-
     if ($break_start_data === null) {
       $request->session()->flash('error_message', '休憩開始打刻をしていないため休憩終了出来ません');
       $isError = true;

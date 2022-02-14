@@ -47,20 +47,12 @@ class AttendanceController extends Controller
             ->whereNull('punch_out')
             ->where('date', '<=', $today)
             ->first();
-        // if ($punch_in_data === null) {
-        //     $request->session()->flash('error_message', '今日またはそれ以前の勤務開始打刻がないため勤務終了出来ません');
-        //     return redirect(route('index'));
-        // }
-
-        // $break_start_data = Time::find($punch_in_data->id)->rests
-        //     ->whereNotNull('break_start')
-        //     ->whereNull('break_end')
-        //     ->first();
-        // if ($break_start_data) {
-        //     $request->session()->flash('error_message', '休憩終了打刻をしていないため勤務終了出来ません');
-        //     return redirect(route('index'));
-        // }
         $hasError = validation::punchOutvalidation($request);
+        if ($hasError) {
+            return redirect(route('index'));
+        }
+
+        $hasError = validation::punchOutvalidation2($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -89,22 +81,12 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        // if ($punch_in_data === null) {
-        //     $request->session()->flash('error_message', '勤務開始打刻をしていないため休憩開始出来ません');
-        //     return redirect(route('index'));
-        // }
-
-        // $break_start_data = Time::find($punch_in_data->id)->rests
-        //     ->whereNotNull('break_start')
-        //     ->whereNull('break_end')
-        //     ->first();
-
-        // if ($break_start_data) {
-        //     $request->session()->flash('error_message', '既に休憩開始ボタンを押しているため休憩開始出来ません');
-        //     return redirect(route('index'));
-        // }
-
         $hasError = validation::breakStartvalidation($request);
+        if ($hasError) {
+            return redirect(route('index'));
+        }
+
+        $hasError = validation::breakStartvalidation2($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -133,21 +115,17 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        // if ($punch_in_data === null) {
-        //     $request->session()->flash('error_message', '出勤開始打刻をしていないため休憩終了出来ません');
-        //     return redirect(route('index'));
-        // }
+        $hasError = validation::breakEndvalidation($request);
+        if ($hasError) {
+            return redirect(route('index'));
+        }
 
-        $break_start_data = Time::find($punch_in_data->id ?? '匿名')-> rests ?? '匿名'
+        $break_start_data = Time::find($punch_in_data->id)->rests
             ->whereNotNull('break_start')
             ->whereNull('break_end')
             ->first();
 
-        // if ($break_start_data === null) {
-        //     $request->session()->flash('error_message', '休憩開始打刻をしていないため休憩終了出来ません');
-        //     return redirect(route('index'));
-        // }
-        $hasError = validation::breakEndvalidation($request);
+        $hasError = validation::breakEndvalidation2($request);
         if ($hasError) {
             return redirect(route('index'));
         }
