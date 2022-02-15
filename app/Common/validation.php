@@ -11,7 +11,7 @@ use App\Models\Time;
 
 class validation
 {
-  public static function punchInvalidation(Request $request)
+  public static function cannotpunchInforalreadypunchIn(Request $request)
   {
     $isError = false;
 
@@ -27,7 +27,7 @@ class validation
     }
     return $isError;
   }
-  public static function punchOutvalidation(Request $request)
+  public static function cannotpunchOutfornotpunchIn(Request $request)
   {
     $isError = false;
 
@@ -44,10 +44,8 @@ class validation
     }
     return $isError;
   }
-  public static function punchOutvalidation2(Request $request)
+  public static function cannotpunchOutfornotbreakEnd(Request $request)
   {
-    
-
     $user = Auth::user();
     $today = new Carbon('today');
     $punch_in_data = User::find($user->id)->times()
@@ -55,7 +53,6 @@ class validation
       ->whereNull('punch_out')
       ->where('date', '<=', $today)
       ->first();
-   
 
     $isError = false;
 
@@ -69,7 +66,7 @@ class validation
     }
     return $isError;
   }
-  public static function breakStartvalidation(Request $request)
+  public static function cannotbreakStartfornotpunchIn(Request $request)
   {
     $isError = false;
 
@@ -87,7 +84,7 @@ class validation
     return $isError;
   }
 
-  public static function breakStartvalidation2(Request $request)
+  public static function cannotbreakStartforalreadybreakStart(Request $request)
   {
     $isError = false;
 
@@ -111,7 +108,7 @@ class validation
     return $isError;
   }
 
-  public static function breakEndvalidation(Request $request)
+  public static function cannotbreakfornotpunchIn(Request $request)
   {
     $isError = false;
 
@@ -129,7 +126,7 @@ class validation
     return $isError;
   }
 
-  public static function breakEndvalidation2(Request $request)
+  public static function cannotbreakEndfornotbreakStart(Request $request)
   {
     $isError = false;
 

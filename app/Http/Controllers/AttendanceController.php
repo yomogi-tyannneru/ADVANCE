@@ -22,7 +22,7 @@ class AttendanceController extends Controller
     // 出勤処理
     public function punchIn(Request $request)
     {
-        $hasError = validation::punchInvalidation($request);
+        $hasError = validation::cannotpunchInforalreadypunchIn($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -47,12 +47,12 @@ class AttendanceController extends Controller
             ->whereNull('punch_out')
             ->where('date', '<=', $today)
             ->first();
-        $hasError = validation::punchOutvalidation($request);
+        $hasError = validation::cannotpunchOutfornotpunchIn($request);
         if ($hasError) {
             return redirect(route('index'));
         }
 
-        $hasError = validation::punchOutvalidation2($request);
+        $hasError = validation::cannotpunchOutfornotbreakEnd($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -81,12 +81,12 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        $hasError = validation::breakStartvalidation($request);
+        $hasError = validation::cannotbreakStartfornotpunchIn($request);
         if ($hasError) {
             return redirect(route('index'));
         }
 
-        $hasError = validation::breakStartvalidation2($request);
+        $hasError = validation::cannotbreakStartforalreadybreakStart($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -115,7 +115,7 @@ class AttendanceController extends Controller
             ->where('date', '<=', $today)
             ->first();
 
-        $hasError = validation::breakEndvalidation($request);
+        $hasError = validation::cannotbreakfornotpunchIn($request);
         if ($hasError) {
             return redirect(route('index'));
         }
@@ -125,7 +125,7 @@ class AttendanceController extends Controller
             ->whereNull('break_end')
             ->first();
 
-        $hasError = validation::breakEndvalidation2($request);
+        $hasError = validation::cannotbreakEndfornotbreakStart($request);
         if ($hasError) {
             return redirect(route('index'));
         }
