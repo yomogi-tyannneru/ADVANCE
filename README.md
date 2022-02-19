@@ -2,10 +2,11 @@
 会社の勤怠管理システム
 <img width="1413" alt="スクリーンショット 2022-02-01 23 38 13" src="https://user-images.githubusercontent.com/86700967/151989728-f64177b8-b086-4606-91cc-d66ea4cf4450.png">
 <img width="1408" alt="スクリーンショット 2022-02-01 23 38 22" src="https://user-images.githubusercontent.com/86700967/151989731-ecd48d4e-2d86-4ee2-b31d-53395ef8451d.png">
-<img width="1414" alt="スクリーンショット 2022-02-01 23 35 16" src="https://user-images.githubusercontent.com/86700967/151989702-afe8386e-70a4-4f16-a0e2-82810fca4950.png">
-<img width="1414" alt="スクリーンショット 2022-02-01 23 36 03" src="https://user-images.githubusercontent.com/86700967/151989718-cdd0e837-928f-4d4f-a832-53eb785011c9.png">
-<img width="1410" alt="スクリーンショット 2022-02-01 23 36 31" src="https://user-images.githubusercontent.com/86700967/151989721-53d8d3cf-29fa-4099-aef5-cddc265605a8.png">
-<img width="1410" alt="スクリーンショット 2022-02-01 23 37 01" src="https://user-images.githubusercontent.com/86700967/151989724-6ab215bd-aa96-4a1b-83fb-d36134292b44.png">
+<img width="1311" alt="スクリーンショット 2022-02-19 21 41 29" src="https://user-images.githubusercontent.com/86700967/154801294-191aafe9-06f9-4023-8a6b-db42aef4b9a8.png">
+<img width="1306" alt="スクリーンショット 2022-02-19 21 41 58" src="https://user-images.githubusercontent.com/86700967/154801296-6af7a1bd-9a00-4716-82e4-49e8613ad3e2.png">
+<img width="1309" alt="スクリーンショット 2022-02-19 21 42 19" src="https://user-images.githubusercontent.com/86700967/154801298-984130ba-b844-439c-8f0d-2aec51bbb690.png">
+<img width="1312" alt="スクリーンショット 2022-02-19 21 42 36" src="https://user-images.githubusercontent.com/86700967/154801299-8160a77c-21ae-4e74-b3f0-7e72d00b083d.png">
+
 
 ## 作成した目的
 スクールの課題として取り組みました。模擬案件を通じて、実際の開発に近いものを体験します。
@@ -113,9 +114,9 @@ https://lit-peak-96335.herokuapp.com/
 
 ログイン情報
 
-アカウント名:a
+アカウント名:佐藤　和樹
 
 email:haruto.matsuda@gmail.com
 
-パスワード：aaaaaaaa
+パスワード：satoukazuki
 
