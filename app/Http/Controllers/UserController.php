@@ -21,7 +21,7 @@ class UserController extends Controller
   // ユーザーごとの勤怠表が見れるページ
   public function show(Request $request, $id)
   {
-    $user = Auth::user();
+    $user = User::find($id);
     $today = new Carbon('today');
 
     $all_punch_in_data = User::find($user->id)->times
@@ -29,7 +29,7 @@ class UserController extends Controller
       ->where('date', '<=', $today)
       ->first();
 
-    $user = Auth::user();
+    $user = User::find($id);
     $kari = [
       'times_data' => [],
       'rest_data' => [],
@@ -86,7 +86,7 @@ class UserController extends Controller
         $calclate_rest_data[$rest->time_id] = $this->time_plus($this->hour_to_sec($rest_time_tmp), $this->hour_to_sec($rest_time));
       }
     }
-    $user = Auth::user();
+    $user = User::find($id);
     $param = [
       'times_data' => $times_data,
       'rest_data' => $calclate_rest_data,
