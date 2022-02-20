@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -35,14 +36,6 @@ class RegisteredUserController extends Controller
     {
         // バリデーション
         $request->validate([
-            // required　リクエストされたか？　必須
-            // string　文字か？
-            // max:255　最大255文字
-            // email　メールアドレスの形かどうか？
-            // unique:users　usersテーブルの中に同じemailがあったらダメ
-            // confirmed　確認用のフォームがはいっているかどうか？
-            // Rules\Password::defaults()　文字数制限
-            // VSCODEの機能で記述先に飛べるというのがある
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
@@ -62,12 +55,13 @@ class RegisteredUserController extends Controller
     }
     public function guestLogin()
     {
-        $email = 'hoge@hoge.jp';
-        $password = 'hogehoge';
+        $email = 'haruto.matsuda@gmail.com';
+        $password = 'satoukazuki';
 
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
-            return redirect()->route('home');
+            return redirect()->route('index');
         }
+        Log::debug($password);
 
         return redirect('/');
     }
