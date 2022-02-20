@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
-use Illuminate\Support\Facades\Log;
 
 class RegisteredUserController extends Controller
 {
@@ -61,7 +60,6 @@ class RegisteredUserController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
             return redirect()->route('index');
         }
-        Log::debug($password);
 
         return redirect('/');
     }

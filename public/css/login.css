@@ -95,7 +95,7 @@ body {
 
 .form-btn1 {
     border-radius: 6px;
-    border: 2px solid #929292;
+    border: 2px solid #043cf1;
     background-color: #043cf1;
     height: 50px;
     width: 100%;
@@ -133,6 +133,7 @@ body {
 .guestlogin-btn {
     border-radius: 6px;
     background-color: #043cf1;
+    border: 2px solid #043cf1;
     height: 50px;
     width: 100%;
     display: block;
@@ -141,10 +142,14 @@ body {
     text-align: center;
     color: #fff;
     padding-left: 20px;
-    padding-top: 10px;
+    padding-top: 5px;
     font-weight: lighter;
     margin: 10px;
+    caret-color: #043cf1;
 
 }
 
-
+.guestlogin-btn:hover {
+    filter: opacity(70%);
+    cursor: pointer;
+}
