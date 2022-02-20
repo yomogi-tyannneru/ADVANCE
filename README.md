@@ -1,6 +1,6 @@
 ## Atte
 会社の勤怠管理システム
-<img width="1413" alt="スクリーンショット 2022-02-01 23 38 13" src="https://user-images.githubusercontent.com/86700967/151989728-f64177b8-b086-4606-91cc-d66ea4cf4450.png">
+<img width="1284" alt="スクリーンショット 2022-02-20 16 55 06" src="https://user-images.githubusercontent.com/86700967/154833827-3f6cbdfc-6b32-46dd-b0fd-915e542e9463.png">
 <img width="1408" alt="スクリーンショット 2022-02-01 23 38 22" src="https://user-images.githubusercontent.com/86700967/151989731-ecd48d4e-2d86-4ee2-b31d-53395ef8451d.png">
 <img width="1311" alt="スクリーンショット 2022-02-19 21 41 29" src="https://user-images.githubusercontent.com/86700967/154801294-191aafe9-06f9-4023-8a6b-db42aef4b9a8.png">
 <img width="1306" alt="スクリーンショット 2022-02-19 21 41 58" src="https://user-images.githubusercontent.com/86700967/154801296-6af7a1bd-9a00-4716-82e4-49e8613ad3e2.png">
@@ -10,13 +10,7 @@
 ## URL
 https://lit-peak-96335.herokuapp.com/
 
-ログイン情報
-
-アカウント名:佐藤　和樹
-
-email:haruto.matsuda@gmail.com
-
-パスワード：satoukazuki
+ログイン画面の「ゲストログイン」ボタンからアプリを体験してみてください。
 
 ## 作成した目的
 スクールの課題として取り組みました。模擬案件を通じて、実際の開発に近いものを体験します。
@@ -28,7 +22,7 @@ email:haruto.matsuda@gmail.com
 
 ・JavaScript
 
-・バックエンド
+バックエンド
 
 ・PHP 7.4.23
 
