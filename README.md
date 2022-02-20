@@ -7,6 +7,16 @@
 <img width="1309" alt="スクリーンショット 2022-02-19 21 42 19" src="https://user-images.githubusercontent.com/86700967/154801298-984130ba-b844-439c-8f0d-2aec51bbb690.png">
 <img width="1312" alt="スクリーンショット 2022-02-19 21 42 36" src="https://user-images.githubusercontent.com/86700967/154801299-8160a77c-21ae-4e74-b3f0-7e72d00b083d.png">
 
+## URL
+https://lit-peak-96335.herokuapp.com/
+
+ログイン情報
+
+アカウント名:佐藤　和樹
+
+email:haruto.matsuda@gmail.com
+
+パスワード：satoukazuki
 
 ## 作成した目的
 スクールの課題として取り組みました。模擬案件を通じて、実際の開発に近いものを体験します。
@@ -50,73 +60,3 @@
 ## ER図
 
 <img width="905" alt="スクリーンショット 2022-02-02 19 02 20" src="https://user-images.githubusercontent.com/86700967/152132768-6be22537-0f8b-43fe-82a8-1db0fc4c5461.png">
-
-# 環境を構築する方法
-
-## MAMP / XAMPP
-環境構築（Mac）
-
-MAMPをインストールします
-
-https://www.mamp.info/en/downloads/
-
-環境構築（Windows）
-
-XAMPPをインストールする
-
-https://www.apachefriends.org/jp/index.html
-
-## クローン
-git clone -b master https://github.com/yomogi-tyannneru/ADVANCE.git
-
-## メール認証
-
-```php
-MAIL_DRIVER = smtp
-MAIL_HOST = smtp.gmail.com
-MAIL_PORT = 587
-MAIL_USERNAME =自分のGmail
-MAIL_PASSWORD =自分のアプリのパスワード
-MAIL_ENCRYPTION = tls
-MAIL_FROM_ADDRESS =自分のGmail
-MAIL_FROM_NAME =任意のアプリ名
-```
-
-.envファイルを上記に変更します
-
-○参考サイト
-
-[https://zenn.dev/kazushino/articles/67da2015865ae117444c]（https://zenn.dev/kazushino/articles/67da2015865ae117444c）
-
-## テスト
-PHPUnitを使用してテストを作成する
-
-vendor / bin / phpunitはテストコードです。
-
-vendor / bin / phpunit tests / Feature / Auth / AuthenticationTest.phpは、認定のみのテストです。
-
-## Docker
-Dockerを使用して環境を構築する
-
-Dockerのインストール（Mac）
-
-https://www.docker.com/products/docker-desktop
-
-Dockerのインストール（Windows）
-
-https://hub.docker.com/editions/community/docker-ce-desktop-windows/
-
-## 環境の切り分け
-開発環境と本番環境の切り分けを行います。
-
-## Heroku
-https://lit-peak-96335.herokuapp.com/
-
-ログイン情報
-
-アカウント名:佐藤　和樹
-
-email:haruto.matsuda@gmail.com
-
-パスワード：satoukazuki
-
