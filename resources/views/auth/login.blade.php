@@ -30,6 +30,9 @@
                             <x-button value="ログイン" placeholder="ログイン" class="form-btn1">
                                 {{ __('ログイン') }}
                             </x-button>
+                            <button type="submit" class="btn btn-secondary guest-btn">
+                                <a href="/login/guest">Guest Login</a>
+                            </button>
                         </div>
                     </form>
                     <p class="text">アカウントをお持ちでない方はこちらから</p>

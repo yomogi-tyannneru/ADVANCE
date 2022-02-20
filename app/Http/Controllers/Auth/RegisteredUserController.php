@@ -60,4 +60,15 @@ class RegisteredUserController extends Controller
 
         return redirect(RouteServiceProvider::HOME);
     }
+    public function guestLogin()
+    {
+        $email = 'hoge@hoge.jp';
+        $password = 'hogehoge';
+
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            return redirect()->route('home');
+        }
+
+        return redirect('/');
+    }
 }

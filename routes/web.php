@@ -10,7 +10,6 @@ use App\Http\Controllers\ValidationController;
 Route::get('/', [AttendanceController::class, 'index'])->middleware('auth')->middleware('verified')->name('index');
 
 Route::post('/punch_in', [AttendanceController::class, 'punchIn'])->name('punch_in');
-// Route::post('/punch_in', [AttendanceController::class, 'validation'])->name('validation');
 Route::post('/punch_out', [AttendanceController::class, 'punchOut'])->name('punch_out');
 Route::post('/break_start', [AttendanceController::class, 'breakStart'])->name('break_start');
 Route::post('/break_end', [AttendanceController::class, 'breakEnd'])->name('break_end');

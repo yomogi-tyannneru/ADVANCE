@@ -19,6 +19,9 @@ Route::post('/register', [RegisteredUserController::class, 'store'])
                 ->middleware('guest')
                 ->name('store');
 //ログインページ
+Route::get('/login/guest', [RegisteredUserController::class, 'guestLogin']);
+
+
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])
                 ->middleware('guest')
                 ->name('login');
