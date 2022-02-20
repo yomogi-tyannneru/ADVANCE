@@ -32,7 +32,9 @@
                             </x-button>
                         </div>
                     </form>
-                    <a href="/login/guest">Guest Login</a>
+                    <!-- <x-button href="/login/guest" class="guestlogin-btn" value="ゲストログイン">
+                    </x-button> -->
+                    <a href="/login/guest" class="guestlogin-btn">ゲストログイン</a>
                     <p class="text">アカウントをお持ちでない方はこちらから</p>
                     <a href="/register" class="login_btn" style="color:blue;">会員登録</a>
                 </div>
