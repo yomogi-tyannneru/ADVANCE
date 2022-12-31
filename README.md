@@ -7,11 +7,6 @@
 <img width="1309" alt="スクリーンショット 2022-02-19 21 42 19" src="https://user-images.githubusercontent.com/86700967/154801298-984130ba-b844-439c-8f0d-2aec51bbb690.png">
 <img width="1312" alt="スクリーンショット 2022-02-19 21 42 36" src="https://user-images.githubusercontent.com/86700967/154801299-8160a77c-21ae-4e74-b3f0-7e72d00b083d.png">
 
-## URL
-https://lit-peak-96335.herokuapp.com/
-
-ログイン画面の「ゲストログイン」ボタンからアプリを体験してみてください。
-
 ## 作成した目的
 スクールの課題として取り組みました。模擬案件を通じて、実際の開発に近いものを体験します。
 
